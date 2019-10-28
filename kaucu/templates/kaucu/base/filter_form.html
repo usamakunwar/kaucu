@@ -1,0 +1,27 @@
+{% load myfilters %}
+
+<div class="row collapse bg-white mb-2" id="filter">
+    <div class="col-lg-12 pt-4">
+      <form method="get" class="mb-0">
+        <div class="row">
+          {% for boundfield in filter %}
+          <div class="col-6 col-md-3 col-lg-2 mb-sm-3 pl-4 col-form-label-sm">{{ boundfield.label_tag }}</div>
+          <div class="col-6 col-md-3 col-lg-2 mb-3 pr-4 pl-4 pl-sm-0">
+            {% if boundfield.errors.as_text %}
+            {{ boundfield|addclass:'form-control form-control-sm is-invalid' }}
+            <div class="invalid-feedback">{{ boundfield.errors.as_text }}</div>
+            {% else %}
+            {{ boundfield|addclass:'form-control form-control-sm' }}
+            {% endif %}
+          </div>
+          {% endfor %}
+        </div>
+        <div class="row">
+            <div class="col-md-3 offset-md-9 pl-md-0 col-lg-2 offset-lg-10 pl-4 mb-3 pr-4">
+                <div class="row"><input class="col btn btn-primary btn-sm" type="submit" value="Filter"></div>
+              </div>
+        </div>
+
+      </form>
+    </div>
+  </div>

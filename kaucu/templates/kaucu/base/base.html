@@ -1,0 +1,76 @@
+{% load static %}
+{% load myfilters %}
+
+{% firstof object.slug object.pk as slug_or_pk %}
+<html class="h-100 mdl-js">
+<head>
+    <link rel="stylesheet" href="{% static 'css/build.css' %}" type="text/css">
+</head>
+<script src="{% static 'js/build.js' %}"></script>
+<script src="{% static 'js/common.js' %}"></script>
+
+<body class="d-flex flex-column h-100 bg-out">
+  <nav class="navbar navbar-expand-md navbar-light bg-light">
+    <a class="navbar-brand mr-4" href="#">Travel System</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" 
+    data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarsExample04">
+      <ul class="navbar-nav mr-auto">
+        {% if request.user.is_authenticated %}
+        {% with title=request.resolver_match.namespace %}
+        <li class="nav-item mr-3 {% if title == '' %}active{% endif %}">
+          <a class="nav-link" href="{% url 'dashboard' %}"><i class="fas fa-tachometer-alt"></i> Dashboard <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item mr-3 {% if title == 'sale' %}active{% endif %}">
+          <a class="nav-link" href="{% url 'sale:list' %}"><i class="fas fa-chart-line"></i> Sales</a>
+        </li>
+        <li class="nav-item mr-3 {% if title == 'contact' %}active{% endif %}">
+          <a class="nav-link" href="{% url 'contact:list' %}"><i class="fas fa-id-card-alt"></i> Contacts</a>
+        </li>
+        <li class="nav-item mr-3 {% if title == 'package' %}active{% endif %}">
+          <a class="nav-link" href="{% url 'package:list' %}"><i class="fas fa-box-open"></i> Packages</a>
+        </li>
+        <li class="nav-item mr-3 {% if title == 'payment' %}active{% endif %}">
+          <a class="nav-link" href="{% url 'payment:list' %}"><i class="fas fa-money-check"></i> Payments</a>
+        </li>
+        <li class="nav-item mr-3 {% if title == 'supplier' %}active{% endif %}">
+          <a class="nav-link" href="{% url 'supplier:list' %}"><i class="fas fa-layer-group"></i> Suppliers</a>
+        </li>
+        <li class="nav-item mr-3 {% if title == 'user' %}active{% endif %}">
+          <a class="nav-link" href="{% url 'user:list' %}"><i class="fas fa-users"></i> Users</a>
+        </li>
+        {% endwith %}
+        {% endif %}
+      </ul>
+      {% if request.user.is_authenticated %}
+      {{request.user}}
+      <div class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-user"></i>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown04">
+            <a class="dropdown-item" href="{% url 'user:detail' request.user.slug %}">Profile</a>
+            <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+          </div>
+        </div>
+      {% else %}
+        <a class="nav-link" href="{% url 'login' %}">Login</a>
+      {% endif %}
+    </div>
+  </nav>
+  <div class='container relative mt-3'>
+    {% block content %}
+    {% endblock %} 
+  </div>
+  <footer class="mt-auto py-3 bg-grey">
+  </footer>
+  {{ form.media }}
+  {% include "kaucu/base/dialog.html" %}
+</body>
+</html>
+
+
+

@@ -1,0 +1,49 @@
+{% load myfilters %}
+<div class="row px-4 py-2"><h1>
+  {% if object_list is not None %}
+    {{request.resolver_match.namespace|maketitle}}s
+  {% elif object %} 
+    {{object}}   
+  {% else %}
+    New {{request.resolver_match.namespace|maketitle}}
+  {% endif %}
+
+</h1></div>
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb bg-none mb-0">
+      <!--FOS-->
+      <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Home</a></li>
+      {% if object_list != None %} 
+      <li class="breadcrumb-item active">{{request.resolver_match.namespace|maketitle}}s</li>
+      {% else %}
+        <!--MOS-->
+        {% if breadcrumbs %}
+          {% for url, title in breadcrumbs %}
+            <li class="breadcrumb-item"><a href="{{url}}">{{title}}</a></li>
+          {% endfor %}
+        {% elif object or form %}
+          <li class="breadcrumb-item"><a href="{% url request.resolver_match.namespace|add:':list'%}">{{request.resolver_match.namespace|maketitle}}s</a></li>
+          {% if object and form %}
+            <li class="breadcrumb-item"><a href="{% url request.resolver_match.namespace|add:':detail' slug_or_pk %}">{{object}}</a></li>
+          {% endif %}
+        {% endif %}
+        <!--EOS-->
+        {% if object %}
+          {% if form %}
+            <li class="breadcrumb-item active">Edit</li> 
+            {% include "kaucu/base/menu.html" %} 
+          {% else %}
+            <li class="breadcrumb-item active">{{object}}</li>  
+          {% endif %}
+        {% elif form %}
+          <li class="breadcrumb-item active">New {{request.resolver_match.namespace|maketitle}}</li>
+        {% endif %} 
+      {% endif %} 
+      
+  </ol>
+</nav>
+
+
+
+

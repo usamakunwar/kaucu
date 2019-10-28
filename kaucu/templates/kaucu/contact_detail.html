@@ -1,0 +1,139 @@
+{% extends 'kaucu/base/base.html' %}
+{% load myfilters %}
+{% block content %}
+{% if request.user.is_authenticated %}
+{% include "kaucu/base/breadcrumb.html" %}
+{% endif %}
+{% if perms.change_user %}
+<a class="bread-icon clr-m" href="{% url request.resolver_match.namespace|add:':update' slug_or_pk %}">
+    <i class="far fa-edit"></i>
+</a>  
+{% endif %}   
+<div class="row">
+    <div class="col-lg-12 bg-in py-4 mb-2">
+        <div class="row">
+            <div class="col-lg-6">
+              <div class="row">
+                <div class="col-sm-4 col-lg-4 mb-sm-3 pl-4">Email</div>
+                <div class="col-sm-8 col-lg-8 mb-3 pr-4 pl-4 pl-sm-0">{{ object.email }}</div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="row">
+                <div class="col-sm-4 col-lg-4 mb-sm-3 pl-4">Creator</div>
+                <div class="col-sm-8 col-lg-8 mb-3 pr-4 pl-4 pl-sm-0">{{object.creator|default_if_none:""}}</div>
+              </div>
+            </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="row">
+              <div class="col-sm-4 col-lg-4 mb-sm-3 pl-4">First Name</div>
+              <div class="col-sm-8 col-lg-8 mb-3 pr-4 pl-4 pl-sm-0">{{ object.first_name }}</div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="row">
+              <div class="col-sm-4 col-lg-4 mb-sm-3 pl-4">Last Name</div>
+              <div class="col-sm-8 col-lg-8 mb-3 pr-4 pl-4 pl-sm-0">{{ object.last_name }}</div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="row">
+              <div class="col-sm-4 col-lg-4 mb-sm-3 pl-4">Adress 1</div>
+              <div class="col-sm-8 col-lg-8 mb-3 pr-4 pl-4 pl-sm-0">{{ object.address1|default_if_none:"" }}</div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="row">
+              <div class="col-sm-4 col-lg-4 mb-sm-3 pl-4">Address 2</div>
+              <div class="col-sm-8 col-lg-8 mb-3 pr-4 pl-4 pl-sm-0">{{ object.address2|default_if_none:"" }}</div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="row">
+              <div class="col-sm-4 col-lg-4 mb-sm-3 pl-4">County</div>
+              <div class="col-sm-8 col-lg-8 mb-3 pr-4 pl-4 pl-sm-0">{{ object.county|default_if_none:"" }}</div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="row">
+              <div class="col-sm-4 col-lg-4 mb-sm-3 pl-4">City</div>
+              <div class="col-sm-8 col-lg-8 mb-3 pr-4 pl-4 pl-sm-0">{{ object.city|default_if_none:"" }}</div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="row">
+              <div class="col-sm-4 col-lg-4 mb-sm-3 pl-4">Postcode</div>
+              <div class="col-sm-8 col-lg-8 mb-3 pr-4 pl-4 pl-sm-0">{{ object.postcode|default_if_none:"" }}</div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="row">
+              <div class="col-sm-4 col-lg-4 mb-sm-3 pl-4">Company</div>
+              <div class="col-sm-8 col-lg-8 mb-3 pr-4 pl-4 pl-sm-0">{{ object.company|default_if_none:"" }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+<div class="row">
+  <div class="col-sm-6 mb-2 pr-sm-1"><a
+      class="row p-4 list-group-item-action cursor align-items-center center bg-in text-primary" href="{% url 'sale:create' object.slug %}">
+      <div class="col-sm-12">+ New Sale</div>
+    </a></div>
+  <div class="col-sm-6 mb-2 pl-sm-1"><a
+      class="row p-4 list-group-item-action cursor align-items-center center bg-in disabled" id="proceed"
+      href="/order">
+      <div class="col-sm-12">Proceed</div>
+    </a></div>
+</div>
+
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" id="sales-tab" data-toggle="tab" href="#sales" role="tab" aria-controls="sales"
+      aria-selected="true">Sales</a>
+  </li>
+</ul>
+<div class="tab-content mt-2" id="myTabContent">
+  <div class="tab-pane fade show active" id="sales" role="tabpanel" aria-labelledby="sales-tab">    
+    <div class="table-responsive-sm bg-white">
+        <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Package</th>
+                <th scope="col">Price</th>
+                <th scope="col">Cost</th>
+                <th scope="col">Adult</th>
+                <th scope="col">Child</th>
+                <th scope="col">Infant</th>
+                <th scope="col">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for item in object.sale_set.all %}
+              <tr class="cursor" onclick="window.location='{% url 'sale:detail' item.slug %}';">
+                <td>{{ item.slug }}</td>
+                <td>{{ item.package }}</td>
+                <td>{{ item.price }}</td>
+                <td>{{ item.cost }}</td>
+                <td>{{ item.adult }}</td>
+                <td>{{ item.child }}</td>
+                <td>{{ item.infant }}</td>
+                <td class="clr-white center" scope="row"><div class="py-1 px-1 rounded {{item.status|makeClass }}-status">{{ item.status }} </div></td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+      </div>
+  </div>
+</div>
+
+{% endblock %}

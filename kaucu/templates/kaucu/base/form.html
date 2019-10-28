@@ -1,0 +1,35 @@
+{% load static %}
+{% load myfilters %}
+<form method="post">{% csrf_token %}
+  <div class="row">
+    <div class="col-lg-12 bg-in pt-4 pb-3 mb-2">
+      <div class="row">
+        {% for boundfield in form %}
+        <div class="col-lg-6">
+          <div class="row">
+            <div class="col-sm-4 col-lg-4 mb-sm-3 pl-4">{{ boundfield.label_tag }}</div>
+            <div class="col-sm-8 col-lg-8 mb-3 pr-4 pl-4 pl-  sm-0">
+              {% if boundfield.errors.as_text %}
+              {{ boundfield|addclass:'form-control is-invalid' }}
+              <div class="invalid-feedback">{{ boundfield.errors.as_text }}</div>
+              {% else %}
+              {{ boundfield|addclass:'form-control' }}
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+        <div class="col-lg-6">
+            <div class="row">
+              <div class="col-sm-4 col-lg-4 mb-sm-3 pl-4">{{ boundfield.label_tag }}</div>
+              <div class="col-sm-8 col-lg-8 mb-3 pr-4 pl-4 pl-sm-0 mt-1">
+                  <input class="col-12 py-1 btn btn-primary" type="submit" value="{{ request.resolver_match.url_name|maketitle}}">
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<script src="{% static 'js/form.js' %}"></script>

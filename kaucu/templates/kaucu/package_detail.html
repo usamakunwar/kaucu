@@ -1,0 +1,39 @@
+{% extends 'kaucu/base/base.html' %}
+{% block content %}
+{% if request.user.is_authenticated %}
+{% include "kaucu/base/breadcrumb.html" %}
+{% endif %}
+{% if perms.change_package %}
+<a class="bread-icon clr-m" href="{% url request.resolver_match.namespace|add:':update' slug_or_pk %}">
+    <i class="far fa-edit"></i>
+</a>  
+{% endif %}   
+
+<div class="row">
+  <div class="col-lg-12 bg-in py-4 mb-2">
+      <div class="row">
+          <div class="col-lg-6">
+            <div class="row">
+              <div class="col-sm-4 col-lg-4 mb-sm-3 pl-4">Package</div>
+              <div class="col-sm-8 col-lg-8 mb-3 pr-4 pl-4 pl-sm-0">{{ object.package }}</div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="row">
+              <div class="col-sm-4 col-lg-4 mb-sm-3 pl-4">Creater</div>
+              <div class="col-sm-8 col-lg-8 mb-3 pr-4 pl-4 pl-sm-0">{{ object.creator }}</div>
+            </div>
+          </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="row">
+            <div class="col-sm-4 col-lg-4 mb-sm-3 pl-4">Allow Custom Services</div>
+            <div class="col-sm-8 col-lg-8 mb-3 pr-4 pl-4 pl-sm-0">{{object.allow_custom_services}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'kaucu/base/base.html' %}
+{% block content %}
+{% if request.user.is_authenticated %}
+{% include "kaucu/base/breadcrumb.html" %}
+{% endif %}
+<div class="right-icon"><i class="fas fa-money-check"></i></div>
+
+{% include "kaucu/base/filter_list.html" %}
+
+    <table class="table bg-in mb-2">
+        <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Method</th>
+              <th scope="col">Paid Date</th>
+              <th scope="col">Direction</th>
+              <th scope="col">Currency</th>
+              <th scope="col">IN</th>
+              <th scope="col">OUT</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for object in object_list %}
+            <tr>
+              <td>{{object.slug}}</td>
+              <td>{{object.method}}</td>
+              <td>{{object.paidDate}}</td>
+              <td>{{object.direction}}</td>
+              <td>{{object.currency}}</td>
+              <td>{% if object.direction == 'IN' %} {{object.amount}} {% endif %} </td>
+              <td>{% if object.direction == 'OUT' %} {{object.amount}} {% endif %} </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+    </table>
+
+
+{% include "kaucu/base/paginate.html" %}
+{% endblock %}

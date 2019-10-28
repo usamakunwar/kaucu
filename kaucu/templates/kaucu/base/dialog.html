@@ -1,0 +1,24 @@
+<script>
+function handleDialog(srcURL) {
+  $('#alertContent').empty()
+  $('#alertContent').append("<iframe class='embed-responsive-item' width='100%' height='200' src='"+srcURL+"'></iframe>")
+  $('#AlertButton').click()
+}
+function hideDialog() {
+  $('#alertDismiss').click()
+}
+</script>
+
+<button class="hide" id="AlertButton" data-toggle="modal"  data-target="#alert" ></button>
+<div class="modal fade" id="alert" tabindex="-1" role="dialog" aria-labelledby="alertHeading" aria-hidden="true">
+  <div class="modal-dialog p-0 modal-lg" role="document">
+    <div class="modal-content">
+      <div class="p-3" id="alertContent"></div>
+      <button class="top-right-icon close" id="alertDismiss" type="button" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+

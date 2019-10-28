@@ -1,0 +1,129 @@
+{% extends 'kaucu/base.html' %}
+
+
+{% block content %}
+
+
+<div class="row">
+    <div class="col-lg-12 bg-in py-4 mb-2">
+        <div class="row">
+            <div class="col-lg-6">
+              <div class="row">
+                <div class="col-sm-4 col-lg-4 mb-sm-3 pl-4">Email</div>
+                <div class="col-sm-8 col-lg-8 mb-3 pr-4 pl-4 pl-sm-0">{{ object.user.email }}</div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="row">
+                <div class="col-sm-4 col-lg-4 mb-sm-3 pl-4"></div>
+                <div class="col-sm-8 col-lg-8 mb-3 pr-4 pl-4 pl-sm-0"></div>
+              </div>
+            </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="row">
+              <div class="col-sm-4 col-lg-4 mb-sm-3 pl-4">First Name</div>
+              <div class="col-sm-8 col-lg-8 mb-3 pr-4 pl-4 pl-sm-0">{{ object.user.first_name }}</div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="row">
+              <div class="col-sm-4 col-lg-4 mb-sm-3 pl-4">Last Name</div>
+              <div class="col-sm-8 col-lg-8 mb-3 pr-4 pl-4 pl-sm-0">{{ object.user.last_name }}</div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="row">
+              <div class="col-sm-4 col-lg-4 mb-sm-3 pl-4">Adress 1</div>
+              <div class="col-sm-8 col-lg-8 mb-3 pr-4 pl-4 pl-sm-0">{{ object.address1 }}</div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="row">
+              <div class="col-sm-4 col-lg-4 mb-sm-3 pl-4">Address 2</div>
+              <div class="col-sm-8 col-lg-8 mb-3 pr-4 pl-4 pl-sm-0">{{ object.address2 }}</div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="row">
+              <div class="col-sm-4 col-lg-4 mb-sm-3 pl-4">County</div>
+              <div class="col-sm-8 col-lg-8 mb-3 pr-4 pl-4 pl-sm-0">{{ object.county }}</div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="row">
+              <div class="col-sm-4 col-lg-4 mb-sm-3 pl-4">City</div>
+              <div class="col-sm-8 col-lg-8 mb-3 pr-4 pl-4 pl-sm-0">{{ object.city }}</div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="row">
+              <div class="col-sm-4 col-lg-4 mb-sm-3 pl-4">Postcode</div>
+              <div class="col-sm-8 col-lg-8 mb-3 pr-4 pl-4 pl-sm-0">{{ object.postcode }}</div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="row">
+              <div class="col-sm-4 col-lg-4 mb-sm-3 pl-4">Company</div>
+              <div class="col-sm-8 col-lg-8 mb-3 pr-4 pl-4 pl-sm-0">{{ object.company }}</div>
+            </div>
+          </div>
+        </div>
+        <a class="clr-m" href="/kaucu/contacts/{{ object.pk }}-{{ object.slug }}/edit"><i class="uv-icon far fa-edit"></i></a>
+      </div>
+</div>
+
+
+<div class="row">
+  <div class="col-sm-6 mb-2 pr-sm-1"><a
+      class="row p-4 list-group-item-action cursor align-items-center center bg-in text-primary" href="/passenger">
+      <div class="col-sm-12">+ New Sale</div>
+    </a></div>
+  <div class="col-sm-6 mb-2 pl-sm-1"><a
+      class="row p-4 list-group-item-action cursor align-items-center center bg-in disabled" id="proceed"
+      href="/order">
+      <div class="col-sm-12">Proceed</div>
+    </a></div>
+</div>
+
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
+      aria-selected="true">Sales</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
+      aria-selected="false">Payments</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact"
+      aria-selected="false">Activities</a>
+  </li>
+</ul>
+<div class="tab-content mt-2" id="myTabContent">
+  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+      {% for sale in sales %}
+      <a class="row align-items-center py-3 px-4 mb-2 bg-in list-group-item-action " href="/passenger?id=9zVdFxpx2Yct03kfarHS">
+        <div class="col-5 col-lg-2 mb-2">Hajj Deluxe 2020</div>
+        <div class="col-5 col-lg-2 mb-2">SPECIMEN</div>
+        <div class="col-5 col-lg-2 mb-2">{{ sale.price }}</div>
+        <div class="col-5 col-lg-1 mb-2 mr-lg-4"></div>
+        <div class="col-5 col-lg-1 mb-2 ml-lg-4">£60</div>
+        <div id="9zVdFxpx2Yct03kfarHSStatus" class="col-lg-2 p-1 clr-white center" style="background-color:#e2ad00">
+        Incomplete
+        </div>
+    </a>
+      {% endfor %}
+  </div>
+  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab"></div>
+  <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab"></div>
+</div>
+
+{% endblock %}

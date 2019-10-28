@@ -1,0 +1,303 @@
+{% extends 'kaucu/base/base.html' %}
+{% load myfilters %}
+{% block content %}
+{% if request.user.is_authenticated %}
+{% include "kaucu/base/breadcrumb.html" %}
+{% endif %}
+
+{% if perms.change_sale %}
+<a class="bread-icon clr-m" href="{% url request.resolver_match.namespace|add:':update' slug_or_pk %}">
+    <i class="far fa-edit"></i>
+</a>  
+{% endif %}   
+<div class="row">
+    <div class="col-md-6 col-lg-4 mb-2 pr-lg-2">
+        <div class="row px-4 py-2 clr-white {{object.status|makeClass}}-status"><div class="col-6">Status</div><div class="col-6"><strong>{{object.status}}</strong></div></div>
+    </div>
+    <div class="col-md-6 col-lg-4 mb-2 pr-lg-2">
+      <div class="row px-4 py-2 bg-in"><div class="col-6">Package</div><div class="col-6">Hajj Deluxe 2020</div></div>
+    </div>
+    <div class="col-md-6 col-lg-4 mb-2">
+        <div class="row px-4 py-2 bg-in"><div class="col-6">Creator</div><div class="col-6">Usama Kunwar</div></div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-4 mb-2 pr-sm-2">
+      <div class="row px-4 py-2 bg-in"><div class="col-6">Adult</div><div class="col-6">{{object.adult}}</div></div>
+    </div>
+    <div class="col-sm-4 mb-2 pr-sm-2">
+      <div class="row px-4 py-2 bg-in"><div class="col-6">Child</div><div class="col-6">{{object.child}}</div></div>
+    </div>
+    <div class="col-sm-4 mb-2">
+      <div class="row px-4 py-2 bg-in"><div class="col-6">Infant</div><div class="col-6">{{object.infant}}</div></div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-6 col-md-3 mb-2 pr-sm-2">
+        {% with due=object.price|subtract:object.totals.balance %}
+      <div class="row px-4 py-2 bg-in {% if due == 0 %} paid {% else %} due {% endif %}"><div class="col-6">Due</div><div class="col-6"><strong>{{due}}</strong></div></div>
+        {%endwith%}
+    </div>
+    <div class="col-sm-6 col-md-3 mb-2 pr-md-2">
+      <div class="row px-4 py-2 bg-in"><div class="col-6">Cost</div><div class="col-6">{{object.cost}}</div></div>
+    </div>
+    <div class="col-sm-6 col-md-3 mb-2 pr-sm-2">
+      <div class="row px-4 py-2 bg-in"><div class="col-6">Margin</div><div class="col-6">{{object.price|subtract:object.cost}}</div></div>
+    </div>
+    <div class="col-sm-6 col-md-3 mb-2">
+      <div class="row px-4 py-2 bg-in"><div class="col-6">Price</div><div class="col-6">{{object.price}}</div></div>
+    </div>
+</div>
+
+
+
+
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link {% if request.resolver_match.url_name == 'detail' %} active {% endif %}" 
+    id="services-tab" data-toggle="tab" href="#services" role="tab" aria-controls="services" aria-selected="true">Services</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link {% if request.resolver_match.url_name == 'payment' %} active {% endif %}" 
+    id="payments-tab" data-toggle="tab" href="#payments" role="tab" aria-controls="payments" aria-selected="false">Payments</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link {% if request.resolver_match.url_name == 'passenger' %} active {% endif %}" 
+    id="passengers-tab" data-toggle="tab" href="#passengers" role="tab" aria-controls="passengers" aria-selected="false">Passengers</a>
+  </li>
+</ul>
+<div class="tab-content mt-2"> 
+  <div class="tab-pane fade {% if request.resolver_match.url_name == 'detail' %} show active {% endif %}" id="services" role="tabpanel" aria-labelledby="services-tab">
+    <div class="row">
+      <div class="col-sm-6 mb-2 pr-sm-1 ">
+        <div class="row p-4 align-items-center center bg-in text-primary ">
+          <div class="col-sm-12">
+              <div class="dropdown show">
+                  <a class="dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      + Add Service</a>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                      <a class="dropdown-item" href="{% url 'hotel:create' object.slug %}">Hotel</a>
+                      <a class="dropdown-item" href="{% url 'flight:create' object.slug %}">Flight</a>
+                      <a class="dropdown-item" href="{% url 'transfer:create' object.slug %}">Transfer</a>
+    
+                      <a class="dropdown-item" href="#">Visa</a>
+                  </div>
+              </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+    {% if sale.hotel_set.count > 0 %}
+      <h3 class="p-3">Hotels</h3>
+      <table class="table bg-in mb-2">
+        <thead>
+          <tr>
+            <th>Supplier</th>
+            <th>Hotel</th>
+            <th>City</th>
+            <th>Check In</th>
+            <th>Check Out</th>
+            <th>Rating</th>
+            <th>Room</th>
+            <th>View</th>
+            <th>Meal</th>
+            <th>Qty</th>
+            <th>Rate</th>
+            <th>Cost</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for hotel in sale.hotel_set.all %}
+              <tr>
+                <td>{{hotel.supplier}}</td>
+                <td>{{hotel.hotel}}</td>
+                <td>{{hotel.city}}</td>
+                <td>{{hotel.check_in|date:"d/m/y H:s"}}</td>
+                <td>{{hotel.check_out|date:"d/m/y H:s"}}</td>
+                <td>{{hotel.rating}}</td>
+                <td>{{hotel.room_type}}</td>
+                <td>{{hotel.view}}</td>
+                <td>{{hotel.meal}}</td>
+                <td>{{hotel.quantity}}</td>
+                <td>{{hotel.currency_rate}}</td>
+                <td>{{hotel.cost}}</td>
+                <td><a class="clr-m" href="{% url 'hotel:update' hotel.pk %}"><i class="far fa-edit"></i></a></td>
+              </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+    {% endif %}
+    {% if sale.flight_set.count > 0 %}
+      <h3 class="p-3">Flights</h3>
+      <table class="table bg-in mb-2">
+        <thead>
+          <tr>
+            <th>Supplier</th>
+            <th>Airline</th>
+            <th>Flight No.</th>
+            <th>Departure</th>
+            <th>Time</th>
+            <th>Arrival</th>
+            <th>Time</th>
+            <th>Class</th>
+            <th>A</th>
+            <th>C</th>
+            <th>I</th>
+            <th>Rate</th>
+            <th>Cost</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for flight in sale.flight_set.all %}
+              <tr>
+                <td>{{flight.supplier}}</td>
+                <td>{{flight.airline}}</td>
+                <td>{{flight.flight_no}}</td>
+                <td>{{flight.departure_airport}}</td>
+                <td>{{flight.departure_time|date:"d/m/y H:s"}}</td>
+                <td>{{flight.arrival_airport}}</td>
+                <td>{{flight.arrival_time|date:"d/m/y H:s"}}</td>
+                <td>{{flight.seat_class}}</td>
+                <td>{{flight.adult}}</td>
+                <td>{{flight.child}}</td>
+                <td>{{flight.infant}}</td>
+                <td>{{flight.currency_rate}}</td>
+                <td>{{flight.cost}}</td>
+                <td><a class="clr-m" href="{% url 'flight:update' flight.pk %}"><i class="far fa-edit"></i></a></td>
+              </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+    {% endif %}  
+    
+    {% if sale.transfer_set.count > 0 %}
+      <h3 class="p-3">Transfers</h3>
+      <table class="table bg-in mb-2">
+        <thead>
+          <tr>
+            <th>Supplier</th>
+            <th>From</th>
+            <th>Date</th>
+            <th>To</th>
+            <th>Date</th>
+            <th>Vehicle</th>
+            <th>A</th>
+            <th>C</th>
+            <th>I</th>
+            <th>Rate</th>
+            <th>Cost</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for transfer in sale.transfer_set.all %}
+              <tr>
+                <td>{{transfer.supplier}}</td>
+                <td>{{transfer.from_location}}</td>
+                <td>{{transfer.from_time|date:"d/m/y H:s"}}</td>
+                <td>{{transfer.to_location}}</td>
+                <td>{{transfer.to_time|date:"d/m/y H:s"}}</td>
+                <td>{{transfer.vehicle}}</td>
+                <td>{{transfer.adult}}</td>
+                <td>{{transfer.child}}</td>
+                <td>{{transfer.infant}}</td>
+                <td>{{transfer.currency_rate}}</td>
+                <td>{{transfer.cost}}</td>
+                <td><a class="clr-m" href="{% url 'transfer:update' transfer.pk %}"><i class="far fa-edit"></i></a></td>
+              </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+    {% endif %}      
+  </div>
+  <div class="tab-pane fade {% if request.resolver_match.url_name == 'payment' %} show active {% endif %}" id="payments" role="tabpanel" aria-labelledby="payments-tab">
+    <div class="row">
+      <div class="col-sm-6 mb-2 pr-sm-1 ">
+        <a onclick="handleDialog(`{% url 'sale_payment:create' object.slug %}`)"
+          class="row p-4 list-group-item-action cursor align-items-center center bg-in text-primary">
+          <div class="col-sm-12">+ Assign Payment</div>
+        </a>
+      </div>
+    </div>
+    {% if object.balance_sheet %}
+    <table class="table bg-in mb-2">
+      <thead>
+        <tr>
+          <th>Payment Id</th>
+          <th>Date</th>
+          <th>IN</th>
+          <th>OUT</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+          {% for item in object.balance_sheet %}
+            <tr>
+              <td>{{item.payment_slug}}</td>
+              <td>{{item.paid_date}}</td>
+              <td>{% if item.in_payment != 0 %}{{item.in_payment}}{% endif %}</td>
+              <td>{% if item.out_payment != 0 %}{{item.out_payment}}{% endif %}</td>
+              <th><button onclick="handleDialog(`{% url 'sale_payment:delete' object.slug item.pk %}`)" type="button" class="close text-danger" aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
+              </th>
+            </tr>
+          {% endfor %}
+      </tbody>
+    </table>
+    {% endif %} 
+  </div>
+  <div class="tab-pane fade {% if request.resolver_match.url_name == 'passenger' %} show active {% endif %}" id="passengers" role="tabpanel" aria-labelledby="passengers-tab">
+    <div class="row">
+      <div class="col-sm-6 mb-2 pr-sm-1 ">
+        <a href="{% url 'passenger:create' object.slug %}"
+          class="row p-4 list-group-item-action cursor align-items-center center bg-in text-primary">
+          <div class="col-sm-12">+ Add Passenger</div>
+        </a>
+      </div>
+    </div>
+    {% if sale.passenger_set.count > 0 %}
+    <table class="table bg-in mb-2">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>First name</th>
+          <th>Last name</th>
+          <th>Gender</th>
+          <th>DOB</th>
+          <th>Nationality</th>
+          <th>Birth place</th>
+          <th>Passport no.</th>
+          <th>Expiry</th> 
+          <th></th>
+          <th></th>         
+        </tr>
+      </thead>
+      <tbody>
+          {% for passenger in sale.passenger_set.all %}
+            <tr>
+              <td>{{passenger.title}}</td>
+              <td>{{passenger.first_name}}</td>
+              <td>{{passenger.last_name}}</td>
+              <td>{{passenger.gender}}</td>
+              <td>{{passenger.dob}}</td>
+              <td>{{passenger.nationality}}</td>
+              <td>{{passenger.birth_place}}</td>
+              <td>{{passenger.passport_number}}</td>
+              <td>{{passenger.passport_expiry}}</td>
+              <td><a class="clr-m" href="{% url 'passenger:update' passenger.pk %}"><i class="far fa-edit"></i></a></td>
+              <th><button onclick="handleDialog(`{% url 'passenger:delete' passenger.pk %}`)" type="button" class="close text-danger" aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
+              </th>
+            </tr>
+          {% endfor %}
+      </tbody>
+    </table>
+    {% endif %} 
+  </div>
+</div>
+
+{% endblock %}

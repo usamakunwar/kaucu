@@ -1,0 +1,55 @@
+{% extends 'kaucu/base.html' %}
+
+
+{% block content %}
+
+{% if result is True %}
+  {% include "kaucu/success.html" %}
+{% elif result is False %}
+  {% include "kaucu/fail.html" %}
+{% endif %}
+
+<div class="row">
+    <div class="col-lg-12 bg-in py-4 mb-2">
+        <form method="post">{% csrf_token %}
+            <div class="row">
+              {% for boundfield in userForm %}
+              <div class="col-lg-6">
+                  <div class="row">
+                    <div class="col-sm-4 col-lg-4 mb-sm-3 pl-4">{{ boundfield.label_tag }}</div>
+                    <div class="col-sm-8 col-lg-8 mb-3 pr-4 pl-4 pl-sm-0">
+                        {% if boundfield.errors.as_text %}
+                          {{ boundfield|addclass:'form-control is-invalid' }}
+                          <div class="invalid-feedback">{{ boundfield.errors.as_text }}</div>
+                        {% else %}
+                          {{ boundfield|addclass:'form-control' }}
+                        {% endif %}
+                      </div>
+                  </div>
+              </div>
+              {% endfor %}
+              </div>
+              <div class="row">
+                  {% for boundfield in profileForm %}
+                  <div class="col-lg-6">
+                      <div class="row">
+                        <div class="col-sm-4 col-lg-4 mb-sm-3 pl-4">{{ boundfield.label_tag }}</div>
+                        <div class="col-sm-8 col-lg-8 mb-3 pr-4 pl-4 pl-sm-0">
+                            {{ boundfield|addclass:'form-control' }}
+                            {% if boundfield.errors.as_text %}
+                              <div class="invalid-feedback">{{ boundfield.errors.as_text }}</div>
+                            {% endif %}
+                        </div>
+                      </div>
+                  </div>
+                  {% endfor %}
+                  </div>
+            <input class="btn btn-primary hl-sqr-lng" type="submit" value="Update">
+          </form>
+      </div>
+</div>
+
+{% endblock %}
+
+
+

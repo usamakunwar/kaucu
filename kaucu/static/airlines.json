@@ -1,0 +1,1962 @@
+[
+  {
+    "id": 1,
+    "name": "Adria Airways",
+    "iata": "JP",
+    "code3": 165,
+    "designator": "ADR",
+    "country": "Slovenia"
+  },
+  {
+    "id": 2,
+    "name": "Aegean Airlines",
+    "iata": "A3",
+    "code3": 390,
+    "designator": "AEE",
+    "country": "Greece"
+  },
+  {
+    "id": 3,
+    "name": "Aer Lingus",
+    "iata": "EI",
+    "code3": 53,
+    "designator": "EIN",
+    "country": "Ireland"
+  },
+  {
+    "id": 4,
+    "name": "Aero Republica",
+    "iata": "P5",
+    "code3": 845,
+    "designator": "RBP",
+    "country": "Colombia"
+  },
+  {
+    "id": 5,
+    "name": "Aeroflot",
+    "iata": "SU",
+    "code3": 555,
+    "designator": "AFL",
+    "country": "Russian Federation"
+  },
+  {
+    "id": 6,
+    "name": "Aerolineas Argentinas",
+    "iata": "AR",
+    "code3": 44,
+    "designator": "ARG",
+    "country": "Argentina"
+  },
+  {
+    "id": 7,
+    "name": "Aerolineas Galapagos S.A. Aerogal",
+    "iata": "2K",
+    "code3": 547,
+    "designator": 547,
+    "country": "Ecuador"
+  },
+  {
+    "id": 8,
+    "name": "Aeromexico",
+    "iata": "AM",
+    "code3": 139,
+    "designator": "AMX",
+    "country": "Mexico"
+  },
+  {
+    "id": 9,
+    "name": "Afriqiyah Airways",
+    "iata": "8U",
+    "code3": 546,
+    "designator": "AAW",
+    "country": "Libya"
+  },
+  {
+    "id": 10,
+    "name": "Aigle Azur",
+    "iata": "ZI",
+    "code3": 439,
+    "designator": "AAF",
+    "country": "France"
+  },
+  {
+    "id": 11,
+    "name": "Air Algeria",
+    "iata": "AH",
+    "code3": 124,
+    "designator": "DAH",
+    "country": "Algeria"
+  },
+  {
+    "id": 12,
+    "name": "Air Arabia",
+    "iata": "G9",
+    "code3": 514,
+    "designator": "ABY",
+    "country": "United Arab Emirates"
+  },
+  {
+    "id": 13,
+    "name": "Air Astana",
+    "iata": "KC",
+    "code3": 465,
+    "designator": "KZR",
+    "country": "Kazakhstan"
+  },
+  {
+    "id": 14,
+    "name": "Air Austral",
+    "iata": "UU",
+    "code3": 760,
+    "designator": "REU",
+    "country": "France"
+  },
+  {
+    "id": 15,
+    "name": "Air Baltic",
+    "iata": "BT",
+    "code3": 657,
+    "designator": "BTI",
+    "country": "Latvia"
+  },
+  {
+    "id": 16,
+    "name": "Air Berlin",
+    "iata": "AB",
+    "code3": 745,
+    "designator": "BER",
+    "country": "Germany"
+  },
+  {
+    "id": 17,
+    "name": "Air Botswana",
+    "iata": "BP",
+    "code3": 636,
+    "designator": "BOT",
+    "country": "Botswana"
+  },
+  {
+    "id": 18,
+    "name": "Air Caledonie",
+    "iata": "TY",
+    "code3": 190,
+    "designator": "TPC",
+    "country": "New Caledonia"
+  },
+  {
+    "id": 19,
+    "name": "Air Canada",
+    "iata": "AC",
+    "code3": 14,
+    "designator": "ACA",
+    "country": "Canada"
+  },
+  {
+    "id": 20,
+    "name": "Air China Limited",
+    "iata": "CA",
+    "code3": 999,
+    "designator": "CCA",
+    "country": "China (People's Republic of)"
+  },
+  {
+    "id": 21,
+    "name": "Air Corsica",
+    "iata": "XK",
+    "code3": 146,
+    "designator": "CCM",
+    "country": "France"
+  },
+  {
+    "id": 22,
+    "name": "Air Europa",
+    "iata": "UX",
+    "code3": 996,
+    "designator": "AEA",
+    "country": "Spain"
+  },
+  {
+    "id": 23,
+    "name": "Air France",
+    "iata": "AF",
+    "code3": 57,
+    "designator": "AFR",
+    "country": "France"
+  },
+  {
+    "id": 24,
+    "name": "Air India",
+    "iata": "AI",
+    "code3": 98,
+    "designator": "AIC",
+    "country": "India"
+  },
+  {
+    "id": 25,
+    "name": "Air Koryo",
+    "iata": "JS",
+    "code3": 120,
+    "designator": "KOR",
+    "country": "Korea, Democratic People's Republic of"
+  },
+  {
+    "id": 26,
+    "name": "Air Macau",
+    "iata": "NX",
+    "code3": 675,
+    "designator": "AMU",
+    "country": "Macao SAR, China"
+  },
+  {
+    "id": 27,
+    "name": "Air Madagascar",
+    "iata": "MD",
+    "code3": 258,
+    "designator": "MDG",
+    "country": "Madagascar"
+  },
+  {
+    "id": 28,
+    "name": "Air Malta",
+    "iata": "KM",
+    "code3": 643,
+    "designator": "AMC",
+    "country": "Malta"
+  },
+  {
+    "id": 29,
+    "name": "Air Mauritius",
+    "iata": "MK",
+    "code3": 239,
+    "designator": "MAU",
+    "country": "Mauritius"
+  },
+  {
+    "id": 30,
+    "name": "Air Moldova",
+    "iata": "9U",
+    "code3": 572,
+    "designator": "MLD",
+    "country": "Moldova, Republic of"
+  },
+  {
+    "id": 31,
+    "name": "Air Namibia",
+    "iata": "SW",
+    "code3": 186,
+    "designator": "NMB",
+    "country": "Namibia"
+  },
+  {
+    "id": 32,
+    "name": "Air New Zealand",
+    "iata": "NZ",
+    "code3": 86,
+    "designator": "ANZ",
+    "country": "New Zealand"
+  },
+  {
+    "id": 33,
+    "name": "Air Niugini",
+    "iata": "PX",
+    "code3": 656,
+    "designator": "ANG",
+    "country": "Independent State of Papua New Guinea"
+  },
+  {
+    "id": 34,
+    "name": "Air Nostrum",
+    "iata": "YW",
+    "code3": 694,
+    "designator": "ANE",
+    "country": "Spain"
+  },
+  {
+    "id": 35,
+    "name": "Air One S.p.A.",
+    "iata": "AP",
+    "code3": 867,
+    "designator": "ADH",
+    "country": "Italy"
+  },
+  {
+    "id": 36,
+    "name": "Air SERBIA a.d. Beograd",
+    "iata": "JU",
+    "code3": 115,
+    "designator": "JAT",
+    "country": "Serbia"
+  },
+  {
+    "id": 37,
+    "name": "Air Seychelles",
+    "iata": "HM",
+    "code3": 61,
+    "designator": "SEY",
+    "country": "Seychelles"
+  },
+  {
+    "id": 38,
+    "name": "Air Tahiti",
+    "iata": "VT",
+    "code3": 135,
+    "designator": "VTA",
+    "country": "French Polynesia"
+  },
+  {
+    "id": 39,
+    "name": "Air Tahiti Nui",
+    "iata": "TN",
+    "code3": 244,
+    "designator": "THT",
+    "country": "French Polynesia"
+  },
+  {
+    "id": 40,
+    "name": "Air Transat",
+    "iata": "TS",
+    "code3": 649,
+    "designator": "TSC",
+    "country": "Canada"
+  },
+  {
+    "id": 41,
+    "name": "Air Uganda",
+    "iata": "U7",
+    "code3": 926,
+    "designator": "UGA",
+    "country": "Uganda"
+  },
+  {
+    "id": 42,
+    "name": "Air Vanuatu",
+    "iata": "NF",
+    "code3": 218,
+    "designator": "AVN",
+    "country": "Vanuatu"
+  },
+  {
+    "id": 43,
+    "name": "AirBridgeCargo Airlines",
+    "iata": "RU",
+    "code3": 580,
+    "designator": "ABW",
+    "country": "Russian Federation"
+  },
+  {
+    "id": 44,
+    "name": "Aircalin",
+    "iata": "SB",
+    "code3": 63,
+    "designator": "ACI",
+    "country": "New Caledonia"
+  },
+  {
+    "id": 45,
+    "name": "Airlink",
+    "iata": "4Z",
+    "code3": 749,
+    "designator": "",
+    "country": "South Africa"
+  },
+  {
+    "id": 46,
+    "name": "Alaska Airlines",
+    "iata": "AS",
+    "code3": 27,
+    "designator": "ASA",
+    "country": "United States"
+  },
+  {
+    "id": 47,
+    "name": "Alitalia",
+    "iata": "AZ",
+    "code3": 55,
+    "designator": "AZA",
+    "country": "Italy"
+  },
+  {
+    "id": 48,
+    "name": "All Nippon Airways",
+    "iata": "NH",
+    "code3": 205,
+    "designator": "ANA",
+    "country": "Japan"
+  },
+  {
+    "id": 49,
+    "name": "AlMasria Universal Airlines",
+    "iata": "UJ",
+    "code3": 110,
+    "designator": "LMU",
+    "country": "Egypt"
+  },
+  {
+    "id": 50,
+    "name": "ALS",
+    "iata": "K4",
+    "code3": "",
+    "designator": "",
+    "country": "Kenya"
+  },
+  {
+    "id": 51,
+    "name": "American Airlines",
+    "iata": "AA",
+    "code3": 1,
+    "designator": "AAL",
+    "country": "United States"
+  },
+  {
+    "id": 52,
+    "name": "Arik Air",
+    "iata": "W3",
+    "code3": 725,
+    "designator": "ARA",
+    "country": "Nigeria"
+  },
+  {
+    "id": 53,
+    "name": "Arkia Israeli Airlines",
+    "iata": "IZ",
+    "code3": 238,
+    "designator": "AIZ",
+    "country": "Israel"
+  },
+  {
+    "id": 54,
+    "name": "Asiana",
+    "iata": "OZ",
+    "code3": 988,
+    "designator": "AAR",
+    "country": "Korea"
+  },
+  {
+    "id": 55,
+    "name": "Atlas Air",
+    "iata": "5Y",
+    "code3": 369,
+    "designator": "GTI",
+    "country": "United States"
+  },
+  {
+    "id": 56,
+    "name": "Atlasjet Airlines",
+    "iata": "KK",
+    "code3": 610,
+    "designator": "KKK",
+    "country": "Turkey"
+  },
+  {
+    "id": 57,
+    "name": "Austral",
+    "iata": "AU",
+    "code3": 143,
+    "designator": "AUT",
+    "country": "Argentina"
+  },
+  {
+    "id": 58,
+    "name": "Austrian",
+    "iata": "OS",
+    "code3": 257,
+    "designator": "AUA",
+    "country": "Austria"
+  },
+  {
+    "id": 59,
+    "name": "AVIANCA",
+    "iata": "AV",
+    "code3": 134,
+    "designator": "AVA",
+    "country": "Colombia"
+  },
+  {
+    "id": 60,
+    "name": "Avianca Brasil",
+    "iata": "O6",
+    "code3": 247,
+    "designator": "ONE",
+    "country": "Brazil"
+  },
+  {
+    "id": 61,
+    "name": "Azerbaijan Airlines",
+    "iata": "J2",
+    "code3": 771,
+    "designator": "AHY",
+    "country": "Azerbaijan"
+  },
+  {
+    "id": 62,
+    "name": "B&H Airlines",
+    "iata": "JA*",
+    "code3": 995,
+    "designator": "BON",
+    "country": "Bosnia and Herzegovina"
+  },
+  {
+    "id": 63,
+    "name": "Bangkok Air",
+    "iata": "PG",
+    "code3": 829,
+    "designator": "BKP",
+    "country": "Thailand"
+  },
+  {
+    "id": 64,
+    "name": "Belavia - Belarusian Airlines",
+    "iata": "B2",
+    "code3": 628,
+    "designator": "BRU",
+    "country": "Belarus"
+  },
+  {
+    "id": 65,
+    "name": "BH AIR",
+    "iata": "8H",
+    "code3": 366,
+    "designator": "BGH",
+    "country": "Bulgaria"
+  },
+  {
+    "id": 66,
+    "name": "Biman",
+    "iata": "BG",
+    "code3": 997,
+    "designator": "BBC",
+    "country": "Bangladesh"
+  },
+  {
+    "id": 67,
+    "name": "Binter Canarias",
+    "iata": "NT",
+    "code3": 474,
+    "designator": "IBB",
+    "country": "Spain"
+  },
+  {
+    "id": 68,
+    "name": "Blue Panorama",
+    "iata": "BV",
+    "code3": 4,
+    "designator": "BPA",
+    "country": "Italy"
+  },
+  {
+    "id": 69,
+    "name": "Blue1",
+    "iata": "KF",
+    "code3": 142,
+    "designator": "BLF",
+    "country": "Finland"
+  },
+  {
+    "id": 70,
+    "name": "bmi Regional",
+    "iata": "BM",
+    "code3": 480,
+    "designator": "BMR",
+    "country": "United Kingdom"
+  },
+  {
+    "id": 71,
+    "name": "Boliviana de Aviacion (BoA)",
+    "iata": "OB",
+    "code3": 930,
+    "designator": "BOV",
+    "country": "Bolivia"
+  },
+  {
+    "id": 72,
+    "name": "British Airways",
+    "iata": "BA",
+    "code3": 125,
+    "designator": "BAW",
+    "country": "United Kingdom"
+  },
+  {
+    "id": 73,
+    "name": "Brussels Airlines",
+    "iata": "SN",
+    "code3": 82,
+    "designator": "BEL",
+    "country": "Belgium"
+  },
+  {
+    "id": 74,
+    "name": "Bulgaria air",
+    "iata": "FB",
+    "code3": 623,
+    "designator": "LZB",
+    "country": "Bulgaria"
+  },
+  {
+    "id": 75,
+    "name": "C.A.L. Cargo Airlines",
+    "iata": "5C",
+    "code3": 700,
+    "designator": "ICL",
+    "country": "Israel"
+  },
+  {
+    "id": 76,
+    "name": "Cargojet Airways",
+    "iata": "W8",
+    "code3": 489,
+    "designator": "CJT",
+    "country": "Canada"
+  },
+  {
+    "id": 77,
+    "name": "Cargolux S.A.",
+    "iata": "CV",
+    "code3": 172,
+    "designator": "CLX",
+    "country": "Luxembourg"
+  },
+  {
+    "id": 78,
+    "name": "Caribbean Airlines",
+    "iata": "BW",
+    "code3": 106,
+    "designator": "BWA",
+    "country": "Jamaica"
+  },
+  {
+    "id": 79,
+    "name": "Carpatair",
+    "iata": "V3",
+    "code3": 21,
+    "designator": "KRP",
+    "country": "Romania"
+  },
+  {
+    "id": 80,
+    "name": "Cathay Pacific",
+    "iata": "CX",
+    "code3": 160,
+    "designator": "CPA",
+    "country": "Hong Kong SAR, China"
+  },
+  {
+    "id": 81,
+    "name": "China Airlines",
+    "iata": "CI",
+    "code3": 297,
+    "designator": "CAL",
+    "country": "Chinese Taipei"
+  },
+  {
+    "id": 82,
+    "name": "China Cargo Airlines",
+    "iata": "CK",
+    "code3": 112,
+    "designator": "",
+    "country": "China (People's Republic of)"
+  },
+  {
+    "id": 83,
+    "name": "China Eastern",
+    "iata": "MU",
+    "code3": 781,
+    "designator": "CES",
+    "country": "China (People's Republic of)"
+  },
+  {
+    "id": 84,
+    "name": "China Southern Airlines",
+    "iata": "CZ",
+    "code3": 784,
+    "designator": "CSN",
+    "country": "China (People's Republic of)"
+  },
+  {
+    "id": 85,
+    "name": "CityJet",
+    "iata": "WX",
+    "code3": 689,
+    "designator": "BCY",
+    "country": "Ireland"
+  },
+  {
+    "id": 86,
+    "name": "Comair",
+    "iata": "MN",
+    "code3": 161,
+    "designator": "CAW",
+    "country": "South Africa"
+  },
+  {
+    "id": 87,
+    "name": "Condor",
+    "iata": "DE",
+    "code3": 881,
+    "designator": "CFG",
+    "country": "Germany"
+  },
+  {
+    "id": 88,
+    "name": "COPA Airlines",
+    "iata": "CM",
+    "code3": 230,
+    "designator": "CMP",
+    "country": "Panama"
+  },
+  {
+    "id": 89,
+    "name": "Corendon Airlines",
+    "iata": "XC",
+    "code3": 395,
+    "designator": "CAI",
+    "country": "Turkey"
+  },
+  {
+    "id": 90,
+    "name": "Corsair International",
+    "iata": "SS",
+    "code3": 923,
+    "designator": "CRL",
+    "country": "France"
+  },
+  {
+    "id": 91,
+    "name": "Croatia Airlines",
+    "iata": "OU",
+    "code3": 831,
+    "designator": "CTN",
+    "country": "Croatia"
+  },
+  {
+    "id": 92,
+    "name": "Cubana",
+    "iata": "CU",
+    "code3": 136,
+    "designator": "CUB",
+    "country": "Cuba"
+  },
+  {
+    "id": 93,
+    "name": "Cyprus Airways",
+    "iata": "CY",
+    "code3": 48,
+    "designator": "CYP",
+    "country": "Cyprus"
+  },
+  {
+    "id": 94,
+    "name": "Czech Airlines j.s.c",
+    "iata": "OK",
+    "code3": 64,
+    "designator": "CSA",
+    "country": "Czech Republic"
+  },
+  {
+    "id": 95,
+    "name": "Delta Air Lines",
+    "iata": "DL",
+    "code3": 6,
+    "designator": "DAL",
+    "country": "United States"
+  },
+  {
+    "id": 96,
+    "name": "DHL Air",
+    "iata": "D0",
+    "code3": 936,
+    "designator": "DHK",
+    "country": "United Kingdom"
+  },
+  {
+    "id": 97,
+    "name": "DHL Aviation EEMEA B.S.C.(c)",
+    "iata": "ES*",
+    "code3": 155,
+    "designator": "DHX",
+    "country": "Bahrain"
+  },
+  {
+    "id": 98,
+    "name": "Donavia",
+    "iata": "D9",
+    "code3": 733,
+    "designator": "DNV",
+    "country": "Russian Federation"
+  },
+  {
+    "id": 99,
+    "name": "Dragonair",
+    "iata": "KA",
+    "code3": 43,
+    "designator": "HDA",
+    "country": "Hong Kong SAR, China"
+  },
+  {
+    "id": 100,
+    "name": "Egyptair",
+    "iata": "MS",
+    "code3": 77,
+    "designator": "MSR",
+    "country": "Egypt"
+  },
+  {
+    "id": 101,
+    "name": "EL AL",
+    "iata": "LY",
+    "code3": 114,
+    "designator": "ELY",
+    "country": "Israel"
+  },
+  {
+    "id": 102,
+    "name": "Emirates",
+    "iata": "EK",
+    "code3": 176,
+    "designator": "UAE",
+    "country": "United Arab Emirates"
+  },
+  {
+    "id": 103,
+    "name": "Estonian Air",
+    "iata": "OV",
+    "code3": 960,
+    "designator": "ELL",
+    "country": "Estonia"
+  },
+  {
+    "id": 104,
+    "name": "Ethiopian Airlines",
+    "iata": "ET",
+    "code3": 71,
+    "designator": "ETH",
+    "country": "Ethiopia"
+  },
+  {
+    "id": 105,
+    "name": "Etihad Airways",
+    "iata": "EY",
+    "code3": 607,
+    "designator": "ETD",
+    "country": "United Arab Emirates"
+  },
+  {
+    "id": 106,
+    "name": "Euroatlantic Airways",
+    "iata": "YU",
+    "code3": 551,
+    "designator": "MMZ",
+    "country": "Portugal"
+  },
+  {
+    "id": 107,
+    "name": "European Air Transport",
+    "iata": "QY",
+    "code3": 615,
+    "designator": "BCS",
+    "country": "Germany"
+  },
+  {
+    "id": 108,
+    "name": "Eurowings",
+    "iata": "EW",
+    "code3": 104,
+    "designator": "EWG",
+    "country": "Germany"
+  },
+  {
+    "id": 109,
+    "name": "EVA Air",
+    "iata": "BR",
+    "code3": 695,
+    "designator": "EVA",
+    "country": "Chinese Taipei"
+  },
+  {
+    "id": 110,
+    "name": "Federal Express",
+    "iata": "FX",
+    "code3": 23,
+    "designator": "FDX",
+    "country": "United States"
+  },
+  {
+    "id": 111,
+    "name": "Fiji Airways",
+    "iata": "FJ",
+    "code3": 260,
+    "designator": "FJI",
+    "country": "Fiji"
+  },
+  {
+    "id": 112,
+    "name": "Finnair",
+    "iata": "AY",
+    "code3": 105,
+    "designator": "FIN",
+    "country": "Finland"
+  },
+  {
+    "id": 113,
+    "name": "flybe",
+    "iata": "BE",
+    "code3": 267,
+    "designator": "BEE",
+    "country": "United Kingdom"
+  },
+  {
+    "id": 114,
+    "name": "Freebird Airlines",
+    "iata": "FH",
+    "code3": "Non",
+    "designator": "FHY",
+    "country": "Turkey"
+  },
+  {
+    "id": 115,
+    "name": "Garuda",
+    "iata": "GA",
+    "code3": 126,
+    "designator": "GIA",
+    "country": "Indonesia"
+  },
+  {
+    "id": 116,
+    "name": "Georgian Airways",
+    "iata": "A9",
+    "code3": 606,
+    "designator": "TGZ",
+    "country": "Georgia"
+  },
+  {
+    "id": 117,
+    "name": "Germania",
+    "iata": "ST",
+    "code3": 246,
+    "designator": "GMI",
+    "country": "Germany"
+  },
+  {
+    "id": 118,
+    "name": "Gulf Air",
+    "iata": "GF",
+    "code3": 72,
+    "designator": "GFA",
+    "country": "Bahrain"
+  },
+  {
+    "id": 119,
+    "name": "Hahn Air",
+    "iata": "HR*",
+    "code3": 169,
+    "designator": "HHN",
+    "country": "Germany"
+  },
+  {
+    "id": 120,
+    "name": "Hainan Airlines",
+    "iata": "HU",
+    "code3": 880,
+    "designator": "CHH",
+    "country": "China (People's Republic of)"
+  },
+  {
+    "id": 121,
+    "name": "Hawaiian Airlines",
+    "iata": "HA",
+    "code3": 173,
+    "designator": "HAL",
+    "country": "United States"
+  },
+  {
+    "id": 122,
+    "name": "Hi Fly",
+    "iata": "5K",
+    "code3": "",
+    "designator": "HFY",
+    "country": "Portugal"
+  },
+  {
+    "id": 123,
+    "name": "Hong Kong Airlines",
+    "iata": "HX",
+    "code3": 851,
+    "designator": "CRK",
+    "country": "Hong Kong SAR, China"
+  },
+  {
+    "id": 124,
+    "name": "Hong Kong Express Airways",
+    "iata": "UO",
+    "code3": 128,
+    "designator": "HKE",
+    "country": "Hong Kong SAR, China"
+  },
+  {
+    "id": 125,
+    "name": "IBERIA",
+    "iata": "IB",
+    "code3": 75,
+    "designator": "IBE",
+    "country": "Spain"
+  },
+  {
+    "id": 126,
+    "name": "Icelandair",
+    "iata": "FI",
+    "code3": 108,
+    "designator": "ICE",
+    "country": "Iceland"
+  },
+  {
+    "id": 127,
+    "name": "InselAir",
+    "iata": "7i",
+    "code3": 958,
+    "designator": "INC",
+    "country": "CuraÃ§ao"
+  },
+  {
+    "id": 128,
+    "name": "Interair",
+    "iata": "D6",
+    "code3": 625,
+    "designator": "ILN",
+    "country": "South Africa"
+  },
+  {
+    "id": 129,
+    "name": "InterSky",
+    "iata": "3L",
+    "code3": 222,
+    "designator": "",
+    "country": "Austria"
+  },
+  {
+    "id": 130,
+    "name": "Iran Air",
+    "iata": "IR",
+    "code3": 96,
+    "designator": "IRA",
+    "country": "Iran, Islamic Republic of"
+  },
+  {
+    "id": 131,
+    "name": "Iran Aseman Airlines",
+    "iata": "EP",
+    "code3": 815,
+    "designator": "IRC",
+    "country": "Iran, Islamic Republic of"
+  },
+  {
+    "id": 132,
+    "name": "Israir",
+    "iata": "6H",
+    "code3": 818,
+    "designator": "ISR",
+    "country": "Israel"
+  },
+  {
+    "id": 133,
+    "name": "Japan Airlines",
+    "iata": "JL",
+    "code3": 131,
+    "designator": "JAL",
+    "country": "Japan"
+  },
+  {
+    "id": 134,
+    "name": "Jazeera Airways",
+    "iata": "J9",
+    "code3": 486,
+    "designator": "JZR",
+    "country": "Kuwait"
+  },
+  {
+    "id": 135,
+    "name": "Jet Airways",
+    "iata": "9W",
+    "code3": 589,
+    "designator": "JAI",
+    "country": "India"
+  },
+  {
+    "id": 136,
+    "name": "Jet Lite (India) Limited",
+    "iata": "S2",
+    "code3": 705,
+    "designator": "",
+    "country": "India"
+  },
+  {
+    "id": 137,
+    "name": "JetBlue",
+    "iata": "B6",
+    "code3": 279,
+    "designator": "JBU",
+    "country": "United States"
+  },
+  {
+    "id": 138,
+    "name": "Jordan Aviation",
+    "iata": "R5",
+    "code3": 151,
+    "designator": "JAV",
+    "country": "Jordan"
+  },
+  {
+    "id": 139,
+    "name": "JSC Aircompany Yakutia",
+    "iata": "R3",
+    "code3": 849,
+    "designator": "SYL",
+    "country": "Russian Federation"
+  },
+  {
+    "id": 140,
+    "name": "JSC Nordavia-RA",
+    "iata": "5N",
+    "code3": 316,
+    "designator": "AUL",
+    "country": "Russian Federation"
+  },
+  {
+    "id": 141,
+    "name": "Juneyao Airlines",
+    "iata": "HO",
+    "code3": 18,
+    "designator": "DKH",
+    "country": "China (People's Republic of)"
+  },
+  {
+    "id": 142,
+    "name": "Kenya Airways",
+    "iata": "KQ",
+    "code3": 706,
+    "designator": "KQA",
+    "country": "Kenya"
+  },
+  {
+    "id": 143,
+    "name": "Kish Air",
+    "iata": "Y9",
+    "code3": 780,
+    "designator": "IRK",
+    "country": "Iran, Islamic Republic of"
+  },
+  {
+    "id": 144,
+    "name": "KLM",
+    "iata": "KL",
+    "code3": 74,
+    "designator": "KLM",
+    "country": "Netherlands"
+  },
+  {
+    "id": 145,
+    "name": "Korean Air",
+    "iata": "KE",
+    "code3": 180,
+    "designator": "KAL",
+    "country": "Korea"
+  },
+  {
+    "id": 146,
+    "name": "Kuwait Airways",
+    "iata": "KU",
+    "code3": 229,
+    "designator": "KAC",
+    "country": "Kuwait"
+  },
+  {
+    "id": 147,
+    "name": "LACSA",
+    "iata": "LR",
+    "code3": 133,
+    "designator": "LRC",
+    "country": "Costa Rica"
+  },
+  {
+    "id": 148,
+    "name": "LAM",
+    "iata": "TM",
+    "code3": 68,
+    "designator": "LAM",
+    "country": "Mozambique"
+  },
+  {
+    "id": 149,
+    "name": "Lan Airlines",
+    "iata": "LA",
+    "code3": 45,
+    "designator": "LAN",
+    "country": "Chile"
+  },
+  {
+    "id": 150,
+    "name": "Lan Argentina",
+    "iata": "4M",
+    "code3": 469,
+    "designator": "DSM",
+    "country": "Argentina"
+  },
+  {
+    "id": 151,
+    "name": "Lan Cargo",
+    "iata": "UC",
+    "code3": 145,
+    "designator": "LCO",
+    "country": "Chile"
+  },
+  {
+    "id": 152,
+    "name": "LATAM Airlines Peru S.A.",
+    "iata": "LP",
+    "code3": 544,
+    "designator": "LPE",
+    "country": "Peru"
+  },
+  {
+    "id": 153,
+    "name": "LanEcuador",
+    "iata": "XL",
+    "code3": 462,
+    "designator": "LNE",
+    "country": "Ecuador"
+  },
+  {
+    "id": 154,
+    "name": "LIAT Airlines",
+    "iata": "LI",
+    "code3": 140,
+    "designator": "LIA",
+    "country": "Antigua and Barbuda"
+  },
+  {
+    "id": 155,
+    "name": "Libyan Airlines",
+    "iata": "LN",
+    "code3": 148,
+    "designator": "LAA",
+    "country": "Libya"
+  },
+  {
+    "id": 156,
+    "name": "LLC \"NORD WIND",
+    "iata": "N4",
+    "code3": 216,
+    "designator": "NWS",
+    "country": "Russian Federation"
+  },
+  {
+    "id": 157,
+    "name": "LOT Polish Airlines",
+    "iata": "LO",
+    "code3": 80,
+    "designator": "LOT",
+    "country": "Poland"
+  },
+  {
+    "id": 158,
+    "name": "Lufthansa Cargo",
+    "iata": "LH",
+    "code3": 20,
+    "designator": "GEC",
+    "country": "Germany"
+  },
+  {
+    "id": 159,
+    "name": "Lufthansa CityLine",
+    "iata": "CL",
+    "code3": 683,
+    "designator": "CLH",
+    "country": "Germany"
+  },
+  {
+    "id": 160,
+    "name": "Luxair",
+    "iata": "LG",
+    "code3": 149,
+    "designator": "LGL",
+    "country": "Luxembourg"
+  },
+  {
+    "id": 161,
+    "name": "Mahan Air",
+    "iata": "W5",
+    "code3": 537,
+    "designator": "IRM",
+    "country": "Iran, Islamic Republic of"
+  },
+  {
+    "id": 162,
+    "name": "Malaysia Airlines",
+    "iata": "MH",
+    "code3": 232,
+    "designator": "MAS",
+    "country": "Malaysia"
+  },
+  {
+    "id": 163,
+    "name": "Braathens Regional Aviation AB",
+    "iata": "TF",
+    "code3": 276,
+    "designator": "SCW",
+    "country": "Sweden"
+  },
+  {
+    "id": 164,
+    "name": "Martinair Cargo",
+    "iata": "MP",
+    "code3": 129,
+    "designator": "MPH",
+    "country": "Netherlands"
+  },
+  {
+    "id": 165,
+    "name": "MAS AIR",
+    "iata": "M7",
+    "code3": 865,
+    "designator": "MAA",
+    "country": "Mexico"
+  },
+  {
+    "id": 166,
+    "name": "MEA",
+    "iata": "ME",
+    "code3": 76,
+    "designator": "MEA",
+    "country": "Lebanon"
+  },
+  {
+    "id": 167,
+    "name": "Meridiana fly",
+    "iata": "IG",
+    "code3": 191,
+    "designator": "ISS",
+    "country": "Italy"
+  },
+  {
+    "id": 168,
+    "name": "MIAT",
+    "iata": "OM",
+    "code3": 289,
+    "designator": "MGL",
+    "country": "Mongolia"
+  },
+  {
+    "id": 169,
+    "name": "Montenegro Airlines",
+    "iata": "YM",
+    "code3": 409,
+    "designator": "MGX",
+    "country": "Montenegro"
+  },
+  {
+    "id": 170,
+    "name": "Nesma Airlines",
+    "iata": "NE",
+    "code3": 477,
+    "designator": "NMA",
+    "country": "Egypt"
+  },
+  {
+    "id": 171,
+    "name": "NIKI",
+    "iata": "HG",
+    "code3": "",
+    "designator": "",
+    "country": "Austria"
+  },
+  {
+    "id": 172,
+    "name": "Nile Air",
+    "iata": "NP",
+    "code3": 325,
+    "designator": "NIA",
+    "country": "Egypt"
+  },
+  {
+    "id": 173,
+    "name": "Nippon Cargo Airlines (NCA)",
+    "iata": "KZ",
+    "code3": 933,
+    "designator": "NCA",
+    "country": "Japan"
+  },
+  {
+    "id": 174,
+    "name": "Nouvelair",
+    "iata": "BJ",
+    "code3": 796,
+    "designator": "LBT",
+    "country": "Tunisia"
+  },
+  {
+    "id": 175,
+    "name": "Olympic Air",
+    "iata": "OA",
+    "code3": 50,
+    "designator": "OAL",
+    "country": "Greece"
+  },
+  {
+    "id": 176,
+    "name": "Oman Air",
+    "iata": "WY",
+    "code3": 910,
+    "designator": "OAS",
+    "country": "Oman"
+  },
+  {
+    "id": 177,
+    "name": "Onur Air",
+    "iata": "8Q",
+    "code3": 66,
+    "designator": "OHY",
+    "country": "Turkey"
+  },
+  {
+    "id": 178,
+    "name": "PAL",
+    "iata": "PR",
+    "code3": 79,
+    "designator": "PAL",
+    "country": "Philippines"
+  },
+  {
+    "id": 179,
+    "name": "Pegasus Airlines",
+    "iata": "PC",
+    "code3": 624,
+    "designator": "PGT",
+    "country": "Turkey"
+  },
+  {
+    "id": 180,
+    "name": "Portugalia Airlines",
+    "iata": "NI",
+    "code3": 685,
+    "designator": "PGA",
+    "country": "Portugal"
+  },
+  {
+    "id": 181,
+    "name": "PIA",
+    "iata": "PK",
+    "code3": 214,
+    "designator": "PIA",
+    "country": "Pakistan"
+  },
+  {
+    "id": 182,
+    "name": "Precision Air",
+    "iata": "PW",
+    "code3": 31,
+    "designator": "PRF",
+    "country": "Tanzania, United Republic of"
+  },
+  {
+    "id": 183,
+    "name": "PrivatAir",
+    "iata": "PV",
+    "code3": "",
+    "designator": "PTI",
+    "country": "Switzerland"
+  },
+  {
+    "id": 184,
+    "name": "Qantas",
+    "iata": "QF",
+    "code3": 81,
+    "designator": "QFA",
+    "country": "Australia"
+  },
+  {
+    "id": 185,
+    "name": "Qatar Airways",
+    "iata": "QR",
+    "code3": 157,
+    "designator": "QTR",
+    "country": "Qatar"
+  },
+  {
+    "id": 186,
+    "name": "Rossiya Airlines",
+    "iata": "FV",
+    "code3": 195,
+    "designator": "SDM",
+    "country": "Russian Federation"
+  },
+  {
+    "id": 187,
+    "name": "Royal Air Maroc",
+    "iata": "AT",
+    "code3": 147,
+    "designator": "RAM",
+    "country": "Morocco"
+  },
+  {
+    "id": 188,
+    "name": "Royal Brunei",
+    "iata": "BI",
+    "code3": 672,
+    "designator": "RBA",
+    "country": "Brunei Darussalam"
+  },
+  {
+    "id": 189,
+    "name": "Royal Jordanian",
+    "iata": "RJ",
+    "code3": 512,
+    "designator": "RJA",
+    "country": "Jordan"
+  },
+  {
+    "id": 190,
+    "name": "SAA",
+    "iata": "SA",
+    "code3": 83,
+    "designator": "SAA",
+    "country": "South Africa"
+  },
+  {
+    "id": 191,
+    "name": "Safair",
+    "iata": "FA*",
+    "code3": 640,
+    "designator": "SFR",
+    "country": "South Africa"
+  },
+  {
+    "id": 192,
+    "name": "Safi Airways",
+    "iata": "4Q",
+    "code3": 741,
+    "designator": "SFW",
+    "country": "Afghanistan"
+  },
+  {
+    "id": 193,
+    "name": "SAS",
+    "iata": "SK",
+    "code3": 117,
+    "designator": "SAS",
+    "country": "Sweden"
+  },
+  {
+    "id": 194,
+    "name": "SATA (Air Acores)",
+    "iata": "SP",
+    "code3": 737,
+    "designator": "SAT",
+    "country": "Portugal"
+  },
+  {
+    "id": 195,
+    "name": "SATA Internacional",
+    "iata": "S4",
+    "code3": 331,
+    "designator": "RZO",
+    "country": "Portugal"
+  },
+  {
+    "id": 196,
+    "name": "Saudi Arabian Airlines",
+    "iata": "SV",
+    "code3": 65,
+    "designator": "SVA",
+    "country": "Saudi Arabia"
+  },
+  {
+    "id": 197,
+    "name": "Shandong Airlines",
+    "iata": "SC",
+    "code3": 324,
+    "designator": "CDG",
+    "country": "China (People's Republic of)"
+  },
+  {
+    "id": 198,
+    "name": "Shanghai Airlines",
+    "iata": "FM",
+    "code3": 774,
+    "designator": "",
+    "country": "China (People's Republic of)"
+  },
+  {
+    "id": 199,
+    "name": "Shenzhen Airlines",
+    "iata": "ZH",
+    "code3": 479,
+    "designator": "CSZ",
+    "country": "China (People's Republic of)"
+  },
+  {
+    "id": 200,
+    "name": "SIA Cargo",
+    "iata": "SQ",
+    "code3": "",
+    "designator": "SIA",
+    "country": "Singapore"
+  },
+  {
+    "id": 201,
+    "name": "Siberia Airlines",
+    "iata": "S7",
+    "code3": 421,
+    "designator": "SBI",
+    "country": "Russian Federation"
+  },
+  {
+    "id": 202,
+    "name": "Sichuan Airlines",
+    "iata": "3U",
+    "code3": 876,
+    "designator": "",
+    "country": "China (People's Republic of)"
+  },
+  {
+    "id": 203,
+    "name": "Silkair",
+    "iata": "MI",
+    "code3": 629,
+    "designator": "SLK",
+    "country": "Singapore"
+  },
+  {
+    "id": 204,
+    "name": "South African Express Airways",
+    "iata": "XZ",
+    "code3": "",
+    "designator": "EXY",
+    "country": "South Africa"
+  },
+  {
+    "id": 205,
+    "name": "SriLankan",
+    "iata": "UL",
+    "code3": 603,
+    "designator": "ALK",
+    "country": "Sri Lanka"
+  },
+  {
+    "id": 206,
+    "name": "Sudan Airways",
+    "iata": "SD",
+    "code3": 200,
+    "designator": "SUD",
+    "country": "Sudan"
+  },
+  {
+    "id": 207,
+    "name": "SunExpress",
+    "iata": "XQ",
+    "code3": 564,
+    "designator": "SXS",
+    "country": "Turkey"
+  },
+  {
+    "id": 208,
+    "name": "Surinam Airways",
+    "iata": "PY",
+    "code3": 192,
+    "designator": "SLM",
+    "country": "Suriname"
+  },
+  {
+    "id": 209,
+    "name": "SWISS",
+    "iata": "LX",
+    "code3": 724,
+    "designator": "SWR",
+    "country": "Switzerland"
+  },
+  {
+    "id": 210,
+    "name": "SYPHAX AIRLINES",
+    "iata": "FS",
+    "code3": 393,
+    "designator": "SYA",
+    "country": "Tunisia"
+  },
+  {
+    "id": 211,
+    "name": "Syrianair",
+    "iata": "RB",
+    "code3": 70,
+    "designator": "SYR",
+    "country": "Syrian Arab Republic"
+  },
+  {
+    "id": 212,
+    "name": "TAAG - Angola Airlines",
+    "iata": "DT",
+    "code3": 118,
+    "designator": "DTA",
+    "country": "Angola"
+  },
+  {
+    "id": 213,
+    "name": "TACA",
+    "iata": "TA",
+    "code3": 202,
+    "designator": "TAI",
+    "country": "El Salvador"
+  },
+  {
+    "id": 214,
+    "name": "TACA Peru",
+    "iata": "T0",
+    "code3": 530,
+    "designator": "TPU",
+    "country": "Peru"
+  },
+  {
+    "id": 215,
+    "name": "TACV Cabo Verde Airlines",
+    "iata": "VR",
+    "code3": 696,
+    "designator": "TCV",
+    "country": "Cape Verde"
+  },
+  {
+    "id": 216,
+    "name": "LATAM Airlines Paraguay",
+    "iata": "PZ",
+    "code3": 692,
+    "designator": "LAP",
+    "country": "Paraguay"
+  },
+  {
+    "id": 217,
+    "name": "LATAM Airlines Brasil",
+    "iata": "JJ",
+    "code3": 957,
+    "designator": "TAM",
+    "country": "Brazil"
+  },
+  {
+    "id": 218,
+    "name": "TAME Linea Aerea del Ecuador",
+    "iata": "EQ",
+    "code3": 269,
+    "designator": "TAE",
+    "country": "Ecuador"
+  },
+  {
+    "id": 219,
+    "name": "TAP Portugal",
+    "iata": "TP",
+    "code3": 47,
+    "designator": "TAP",
+    "country": "Portugal"
+  },
+  {
+    "id": 220,
+    "name": "TAROM",
+    "iata": "RO",
+    "code3": 281,
+    "designator": "ROT",
+    "country": "Romania"
+  },
+  {
+    "id": 221,
+    "name": "Thai Airways International",
+    "iata": "TG",
+    "code3": 217,
+    "designator": "THA",
+    "country": "Thailand"
+  },
+  {
+    "id": 222,
+    "name": "THY - Turkish Airlines",
+    "iata": "TK",
+    "code3": 235,
+    "designator": "THY",
+    "country": "Turkey"
+  },
+  {
+    "id": 223,
+    "name": "Tianjin Airlines",
+    "iata": "GS",
+    "code3": 826,
+    "designator": "GCR",
+    "country": "China (People's Republic of)"
+  },
+  {
+    "id": 224,
+    "name": "TMA",
+    "iata": "N2",
+    "code3": 673,
+    "designator": "TMA",
+    "country": "Lebanon"
+  },
+  {
+    "id": 225,
+    "name": "TNT Airways S.A.",
+    "iata": "3V",
+    "code3": 756,
+    "designator": "TAY",
+    "country": "Belgium"
+  },
+  {
+    "id": 226,
+    "name": "Transaero",
+    "iata": "UN",
+    "code3": 670,
+    "designator": "TSO",
+    "country": "Russian Federation"
+  },
+  {
+    "id": 227,
+    "name": "TransAsia Airways",
+    "iata": "GE",
+    "code3": 170,
+    "designator": "TNA",
+    "country": "Chinese Taipei"
+  },
+  {
+    "id": 228,
+    "name": "TUIfly",
+    "iata": "X3*",
+    "code3": 617,
+    "designator": "TUI",
+    "country": "Germany"
+  },
+  {
+    "id": 229,
+    "name": "Tunisair",
+    "iata": "TU",
+    "code3": 199,
+    "designator": "TAR",
+    "country": "Tunisia"
+  },
+  {
+    "id": 230,
+    "name": "Ukraine International Airlines",
+    "iata": "PS",
+    "code3": 566,
+    "designator": "AUI",
+    "country": "Ukraine"
+  },
+  {
+    "id": 231,
+    "name": "United Airlines",
+    "iata": "UA",
+    "code3": 16,
+    "designator": "UAL",
+    "country": "United States"
+  },
+  {
+    "id": 232,
+    "name": "UPS Airlines",
+    "iata": "5X",
+    "code3": 406,
+    "designator": "UPS",
+    "country": "United States"
+  },
+  {
+    "id": 233,
+    "name": "US Airways",
+    "iata": "US",
+    "code3": 37,
+    "designator": "USA",
+    "country": "United States"
+  },
+  {
+    "id": 234,
+    "name": "UTair",
+    "iata": "UT",
+    "code3": 298,
+    "designator": "UTA",
+    "country": "Russian Federation"
+  },
+  {
+    "id": 235,
+    "name": "Uzbekistan Airways",
+    "iata": "HY",
+    "code3": 250,
+    "designator": "UZB",
+    "country": "Uzbekistan"
+  },
+  {
+    "id": 236,
+    "name": "Vietnam Airlines",
+    "iata": "VN",
+    "code3": 738,
+    "designator": "HVN",
+    "country": "Vietnam"
+  },
+  {
+    "id": 237,
+    "name": "Virgin Atlantic",
+    "iata": "VS",
+    "code3": 932,
+    "designator": "VIR",
+    "country": "United Kingdom"
+  },
+  {
+    "id": 238,
+    "name": "Virgin Australia",
+    "iata": "VA",
+    "code3": 795,
+    "designator": "VAU",
+    "country": "Australia"
+  },
+  {
+    "id": 239,
+    "name": "Volaris",
+    "iata": "Y4*",
+    "code3": 36,
+    "designator": "VOI",
+    "country": "Mexico"
+  },
+  {
+    "id": 240,
+    "name": "Volga-Dnepr Airlines",
+    "iata": "VI*",
+    "code3": 412,
+    "designator": "VDA",
+    "country": "Russian Federation"
+  },
+  {
+    "id": 241,
+    "name": "GOL Linhas Aereas S.A.",
+    "iata": "G3",
+    "code3": 127,
+    "designator": "GLO",
+    "country": "Brazil"
+  },
+  {
+    "id": 242,
+    "name": "White coloured by you",
+    "iata": "WI",
+    "code3": 97,
+    "designator": "WHT",
+    "country": "Portugal"
+  },
+  {
+    "id": 243,
+    "name": "Wideroe",
+    "iata": "WF",
+    "code3": 701,
+    "designator": "WIF",
+    "country": "Norway"
+  },
+  {
+    "id": 244,
+    "name": "Xiamen Airlines",
+    "iata": "MF",
+    "code3": 731,
+    "designator": "CXA",
+    "country": "China (People's Republic of)"
+  },
+  {
+    "id": 245,
+    "name": "Yemenia",
+    "iata": "IY",
+    "code3": 635,
+    "designator": "IYE",
+    "country": "Yemen"
+  }
+]

@@ -1,0 +1,31 @@
+{% load static %}
+{% load myfilters %}
+{% firstof slug pk as slug_or_pk %}
+
+<html class="h-100 mdl-js">
+<head>
+    <link rel="stylesheet" href="{% static 'css/build.css' %}" type="text/css">
+</head>
+
+<script src="{% static 'js/build.js' %}"></script>
+
+{% block content %}
+{% endblock %}
+{{ form.media }}
+
+<script>
+//Sale > Assign Payment, change amound on payment selection
+$( "#id_payment" ).change(function() {
+  var selectedText = $("#id_payment option:selected").text()
+  var res = selectedText.split(":")[1].replace(/\s+/g, '');
+  $("#id_amount").val(parseInt(res));
+  console.log(res)
+});
+
+</script>
+
+</body>
+</html>
+
+
+

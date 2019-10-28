@@ -1,0 +1,27 @@
+{% extends 'kaucu/base/base.html' %}
+{% block content %}
+{% if request.user.is_authenticated %}
+{% include "kaucu/base/breadcrumb.html" %}
+{% endif %}
+<div class="right-icon"><i class="fas fa-box-open"></i></div>
+
+{% include "kaucu/base/filter_list.html" %}
+<div class="table-responsive-sm bg-white">
+  <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Package</th>
+          <th scope="col">Custom Services</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for object in object_list %}
+        <tr class="cursor" onclick="window.location='{% url 'package:detail' object.pk %}';">
+          <td>{{ object.package }}</td>
+          <td>{{ object.allow_custom_services }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends 'kaucu/base/base_dialog.html' %}
+{% block content %}
+<form method="post">{% csrf_token %}
+    <p>Are you sure you want to delete "{{ object }}"?</p>
+    <input class="btn btn-primary" type="submit" value="Confirm">
+</form>
+<script>
+  </script>
+{% endblock %}
