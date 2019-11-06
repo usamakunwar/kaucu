@@ -1,38 +1,59 @@
 {% extends 'kaucu/base/base.html' %}
 {% block content %}
-{% if request.user.is_authenticated %}
 {% include "kaucu/base/breadcrumb.html" %}
-{% endif %}
 <div class="right-icon"><i class="fas fa-money-check"></i></div>
 
 {% include "kaucu/base/filter_list.html" %}
-
-    <table class="table bg-in mb-2">
-        <thead>
-            <tr>
-              <th scope="col">ID</th>
-              <th scope="col">Method</th>
-              <th scope="col">Paid Date</th>
-              <th scope="col">Direction</th>
-              <th scope="col">Currency</th>
-              <th scope="col">IN</th>
-              <th scope="col">OUT</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for object in object_list %}
-            <tr>
-              <td>{{object.slug}}</td>
-              <td>{{object.method}}</td>
-              <td>{{object.paidDate}}</td>
-              <td>{{object.direction}}</td>
-              <td>{{object.currency}}</td>
-              <td>{% if object.direction == 'IN' %} {{object.amount}} {% endif %} </td>
-              <td>{% if object.direction == 'OUT' %} {{object.amount}} {% endif %} </td>
-            </tr>
+<div class="table-responsive-lg  bg-in mb-2">
+  <table class="table table-bordered bg-in mb-2">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Source</th>
+          <th>Source ID</th>
+          <th>Method</th>
+          <th>Paid Date</th>
+          <th>Currency</th>
+          <th>IN</th>
+          <th>OUT</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for object in object_list %}
+        <tr>
+          <td>{{object.slug}}</td>
+          <td>
+            {% for sale_payment in object.sale_payment_set.all %}
+              <a target="_blank" href="{% url 'contact:detail' sale_payment.sale.user.slug %}">{{ sale_payment.sale.user }}</a>
+              {% if forloop.last == False %}, {% endif %} 
             {% endfor %}
-          </tbody>
-    </table>
+            {% for supplier_payment in object.supplier_payment_set.all %}
+              <a target="_blank" href="{% url 'supplier:detail' supplier_payment.supplier.pk %}">{{ supplier_payment.supplier }}</a> 
+              {% if forloop.last == False %}, {% endif %}
+            {% endfor %}
+            </td>
+          <td>
+            {% for sale_payment in object.sale_payment_set.all %}
+             <a target="_blank" href="{% url 'sale:detail' sale_payment.sale.slug %}">{{ sale_payment.sale.slug }}</a>
+             {% if forloop.last == False %}, {% endif %}
+            {% endfor %}
+          </td>
+          <td>{{object.method}}</td>
+          <td>{{object.paid_date|date:"d/m/Y"}}</td>
+          <td>{{object.currency}}</td>
+          <td>{% if object.direction == 'IN' %} {{object.amount}} {% endif %} </td>
+          <td>{% if object.direction == 'OUT' %} {{object.amount}} {% endif %} </td>
+          <td>
+            <button onclick="handleDialog(`{% url 'payment:delete' object.slug %}`)" type="button" class="close text-danger" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+  </table>
+</div>
 
 
 {% include "kaucu/base/paginate.html" %}

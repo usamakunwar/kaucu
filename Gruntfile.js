@@ -17,6 +17,7 @@ module.exports = function(grunt) {
           files: {
             'kaucu/static/js/common.js': ['src/javascripts/common.js'],
             'kaucu/static/js/form.js': ['src/javascripts/form.js'],
+            'kaucu/static/js/chart.js': ['bower_components/chart.js/dist/Chart.js'],
           }
         } 
       },

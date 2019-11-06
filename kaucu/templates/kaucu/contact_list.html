@@ -1,35 +1,33 @@
 {% extends 'kaucu/base/base.html' %}
 {% block content %}
-{% if request.user.is_authenticated %}
 {% include "kaucu/base/breadcrumb.html" %}
-{% endif %}
 <div class="right-icon"><i class="fas fa-id-card-alt"></i></div>
 {% include "kaucu/base/filter_list.html" %}
-<div class="table-responsive-sm bg-white">
-    <table class="table table-hover">
-        <thead>
-          <tr>
-            <th scope="col">ID</th>
-            <th scope="col">First Name</th>
-            <th scope="col">Last Name</th>
-            <th scope="col">Email</th>
-            <th scope="col">Created</th>
-            <th scope="col">Creator</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for object in object_list %}
-          <tr class="cursor" onclick="window.location='{% url 'contact:detail' object.slug %}';">
-            <td>{{ object.slug }}</td>
-            <td>{{ object.first_name }}</td>
-            <td>{{ object.last_name }}</td>
-            <td>{{ object.email }}</td>
-            <td>{{ object.created }}</td>
-            <td>{{ object.creator }}</td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-  </div>
+<div class="table-responsive-lg bg-in mb-2">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Created</th>
+        <th scope="col">Creator</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for object in object_list %}
+      <tr class="row-click cursor" data-href="{% url 'contact:detail' object.slug %}">
+        <td>{{ object.slug }}</td>
+        <td>{{ object.first_name }}</td>
+        <td>{{ object.last_name }}</td>
+        <td>{{ object.email }}</td>
+        <td>{{ object.created|date:"d/m/y H:i" }}</td>
+        <td>{{ object.creator }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
 {% include "kaucu/base/paginate.html" %}
 {% endblock %}

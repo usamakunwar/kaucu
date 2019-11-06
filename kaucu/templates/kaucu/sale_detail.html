@@ -1,11 +1,9 @@
 {% extends 'kaucu/base/base.html' %}
 {% load myfilters %}
 {% block content %}
-{% if request.user.is_authenticated %}
 {% include "kaucu/base/breadcrumb.html" %}
-{% endif %}
 
-{% if perms.change_sale %}
+{% if perms.kaucu.change_sale %}
 <a class="bread-icon clr-m" href="{% url request.resolver_match.namespace|add:':update' slug_or_pk %}">
     <i class="far fa-edit"></i>
 </a>  
@@ -15,10 +13,10 @@
         <div class="row px-4 py-2 clr-white {{object.status|makeClass}}-status"><div class="col-6">Status</div><div class="col-6"><strong>{{object.status}}</strong></div></div>
     </div>
     <div class="col-md-6 col-lg-4 mb-2 pr-lg-2">
-      <div class="row px-4 py-2 bg-in"><div class="col-6">Package</div><div class="col-6">Hajj Deluxe 2020</div></div>
+      <div class="row px-4 py-2 bg-in"><div class="col-6">Package</div><div class="col-6">{{object.package}}</div></div>
     </div>
     <div class="col-md-6 col-lg-4 mb-2">
-        <div class="row px-4 py-2 bg-in"><div class="col-6">Creator</div><div class="col-6">Usama Kunwar</div></div>
+        <div class="row px-4 py-2 bg-in"><div class="col-6">Creator</div><div class="col-6">{{object.creator}}</div></div>
     </div>
 </div>
 <div class="row">
@@ -79,8 +77,6 @@
                       <a class="dropdown-item" href="{% url 'hotel:create' object.slug %}">Hotel</a>
                       <a class="dropdown-item" href="{% url 'flight:create' object.slug %}">Flight</a>
                       <a class="dropdown-item" href="{% url 'transfer:create' object.slug %}">Transfer</a>
-    
-                      <a class="dropdown-item" href="#">Visa</a>
                   </div>
               </div>
           </div>

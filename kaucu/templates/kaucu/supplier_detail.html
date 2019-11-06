@@ -1,24 +1,25 @@
 {% extends 'kaucu/base/base.html' %}
 {% load myfilters %}
 {% block content %}
-{% if request.user.is_authenticated %}
-  {% include "kaucu/base/breadcrumb.html" %}
-{% endif %}
-{% if perms.change_supplier %}
+{% include "kaucu/base/breadcrumb.html" %}
+{% if perms.kaucu.change_supplier %}
 <a class="bread-icon clr-m" href="{% url request.resolver_match.namespace|add:':update' slug_or_pk %}">
     <i class="far fa-edit"></i>
 </a>  
 {% endif %}   
 
 <div class="row">
-  <div class="col-sm-6 col-md-4 mb-2 pr-sm-2">
+  <div class="col-sm-6 col-md-3 mb-2 pr-sm-2">
     <div class="row px-4 py-2 bg-in {% if balance > 0 %} positive {% else %} negative {% endif %}"><div class="col-6">Balance</div><div class="col-6"><strong>{{object.totals.balance}}</strong></div></div>
   </div>
-  <div class="col-sm-6 col-md-4 mb-2 pr-md-2">
-    <div class="row px-4 py-2 bg-in"><div class="col-6">Total in</div><div class="col-6">{{object.totals.total_in}}</div></div>
+  <div class="col-sm-6 col-md-3 mb-2 pr-md-2">
+    <div class="row px-4 py-2 bg-in"><div class="col-6">Total credit</div><div class="col-6">{{object.totals.total_in}}</div></div>
   </div>
-  <div class="col-sm-6 col-md-4 mb-2">
-    <div class="row px-4 py-2 bg-in"><div class="col-6">Total out</div><div class="col-6">{{object.totals.total_out}}</div></div>
+  <div class="col-sm-6 col-md-3 mb-2 pr-md-2">
+    <div class="row px-4 py-2 bg-in"><div class="col-6">Total debit</div><div class="col-6">{{object.totals.total_out}}</div></div>
+  </div>
+  <div class="col-sm-6 col-md-3 mb-2">
+    <div class="row px-4 py-2 bg-in"><div class="col-6">Exchange Rate</div><div class="col-6">{{object.currency_rate}}</div></div>
   </div>
 </div>
 
@@ -43,18 +44,18 @@
     <table class="table bg-in mb-2">
         <thead>
             <tr>
-              <th scope="col">#</th>
+              <th scope="col">ID</th>
               <th scope="col">Date</th>
               <th scope="col">Service</th>
               <th scope="col">Package</th>
-              <th scope="col">IN</th>
-              <th scope="col">OUT</th>
+              <th scope="col">Credit</th>
+              <th scope="col">Debit</th>
             </tr>
           </thead>
       <tbody>
           {% for item in object.balance_sheet %}
             <tr>
-              <td>{% if item.service != '' %}<a target="_blank" href="{% url 'sale:detail' item.payment_slug %}">{{item.payment_slug}}</a>{% else %}{{item.payment_slug}}{% endif %}</td>
+              <td>{% if item.service != '' %}<a target="_blank" href="{% url 'sale:detail' item.slug %}">{{item.slug}}</a>{% else %}{{item.slug}}{% endif %}</td>
               <td>{{item.paid_date}}</td>
               <td>{{item.service}}</td>
               <td>{{item.package}}</td>

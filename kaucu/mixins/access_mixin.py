@@ -22,6 +22,11 @@ class PermissionMixin(PermissionRequiredMixin):
     if url_name == 'update':
       return ('kaucu.change_'+name,)
     elif url_name == 'create':
+      orange = ('kaucu.add_'+name,)
+      print(orange)
+      apple = self.request.user.has_perms(('kaucu.add_'+name,))
+      print('apple')
+      print(apple)
       return ('kaucu.add_'+name,)
     elif url_name == 'delete':
       return ('kaucu.delete_'+name,)

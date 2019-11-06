@@ -4,7 +4,7 @@ class FilterMixin():
   paginate_by = 5
   paginate_orphans = 5
   filter = None
-  ordering = 'id'   
+  ordering = '-created'   
    
   def get_context_data(self, **kwargs):
     context = super().get_context_data(**kwargs)

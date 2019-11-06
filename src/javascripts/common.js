@@ -1,8 +1,22 @@
+//selectElementIds = select elements
+//dataSource = data source from json file in static
+//dataUrl = data source from url query
+//queryBy = query the bloodhound by
+//displayValueKeys = values to be displayed in the option tag
+//valueKeys = values to be set in option value tag
+//subtextKeys = values to be set as subtext
 
-function setupSelectFieldData(selectElementIds, dataSource, dataKeys, queryBy) {
+function setupSelectData(selectElementIds, dataSource, dataUrl, queryBy, displayValueKeys, valueKeys, subtextKeys) {
   //Dont run if the element is not on page
   if($('#'+selectElementIds[0]).length == 0) {
     return
+  }
+  if(dataUrl) {
+    $('.bs-searchbox').append(`
+    <div id="input-spinner" class="hide form-control-spinner spinner-border spinner-border-sm text-primary" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+    `)
   }
   function makeBloodHound() {
     if(queryBy != null) {
@@ -10,124 +24,92 @@ function setupSelectFieldData(selectElementIds, dataSource, dataKeys, queryBy) {
     } else {
       datumTokenizer = Bloodhound.tokenizers.whitespace
     }
-    return new Bloodhound({
-      datumTokenizer: datumTokenizer,
-      queryTokenizer: Bloodhound.tokenizers.whitespace,
-      prefetch: {
-        url: '/static/'+dataSource+'.json',
-        cache: false,
-      },
-    }); 
+    
+    if(dataUrl) {
+      return new Bloodhound({
+        datumTokenizer: datumTokenizer,
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        remote: {
+          url: dataUrl+'%QUERY',
+          wildcard: '%QUERY'
+        }
+      });
+    } else if (dataSource) {
+      return new Bloodhound({
+        datumTokenizer: datumTokenizer,
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        prefetch: {
+          url: '/static/'+dataSource+'.json',
+          cache: false,
+        },
+      }); 
+    }
   }
   function getInputField(id) {
     const ownerId = $('[data-id='+id+']').attr('aria-owns') //a button
     return $('[aria-controls='+ownerId+']') //an input (owned by the button)
   }
-  function makeOptionElement(result) {
-    if(dataKeys != null ) {
-      value = ''
-      dataKeys.forEach(key => {
-        value += result[key] + ' '
-      })
-    } else {
-      value = result
-    }
-    var option = new Option(value)
-    option.setAttribute("data-tokens",value);
-    return option
-  }
-  function listenAndUpdateData(elementId, query) {
-    const selectElement = $('#'+elementId)
-    bloodhound.search(query , function(results) {
-      selectElement.empty()
-      results.forEach(result => {
-        selectElement.append(makeOptionElement(result));
-      }); 
-      selectElement.selectpicker('refresh');
-    });
-  }
-  const bloodhound = makeBloodHound()
-  selectElementIds.forEach(elementId => {
-    const selectInput = getInputField(elementId)
-    selectInput.on('keyup',function(){
-      if(this.value.length > 1) {
-        listenAndUpdateData(elementId, this.value)
-      }
+  function makeValueFromKeys(data, keys) {
+    value = ''
+    keys.forEach(key => {
+      value += data[key] + ' '
     })
-  })
-}
-
-
-function setupSelectRemoteData(selectElementIds, dataSource, dataKeys, queryBy) {
-  //Dont run if the element is not on page
-  if($('#'+selectElementIds[0]).length == 0) {
-    return
-  }
-  $('.bs-searchbox').append(`
-  <div id="input-spinner" class="hide form-control-spinner spinner-border spinner-border-sm text-primary" role="status">
-    <span class="sr-only">Loading...</span>
-  </div>
-  `)
-  function makeBloodHound() {
-    if(queryBy != null) {
-      datumTokenizer = Bloodhound.tokenizers.obj.whitespace('name')
-    } else {
-      datumTokenizer = Bloodhound.tokenizers.whitespace
-    }
-    return new Bloodhound({
-      datumTokenizer: datumTokenizer,
-      queryTokenizer: Bloodhound.tokenizers.whitespace,
-      remote: {
-        url: '/kaucu/contact/search/%QUERY',
-        wildcard: '%QUERY'
-      }
-    }); 
-  }
-  function getInputField(id) {
-    const ownerId = $('[data-id='+id+']').attr('aria-owns') //a button
-    return $('[aria-controls='+ownerId+']') //an input (owned by the button)
+    return value.trim()
   }
   function makeOptionElement(result) {
-    if(dataKeys != null ) {
-      value = ''
-      dataKeys.forEach(key => {
-        value += result[key] + ' '
-      })
+    if(displayValueKeys != null ) {
+      displayValue = makeValueFromKeys(result, displayValueKeys)
     } else {
-      value = result
+      displayValue = result
     }
-    var option = new Option(value)
-    option.setAttribute("data-tokens",value);
-    option.setAttribute("value", result['id']);
-    option.setAttribute("data-subtext", result['slug']);
-
-    console.log(option)
+    var option = new Option(displayValue)
+    option.setAttribute("data-tokens", displayValue);
+    if(subtextKeys != null ) {
+      subtext = makeValueFromKeys(result, subtextKeys)
+      option.setAttribute("data-subtext", subtext);
+    }
+    if(valueKeys != null ) {
+      value = makeValueFromKeys(result, valueKeys)
+      option.setAttribute("value", value);
+    }
     return option
   }
-  function sync(datums) { }
-
-
+  function responseSyncORAsync(element, results) { 
+    element.empty()
+    results.forEach(result => {
+      element.append(makeOptionElement(result));
+    }); 
+    element.selectpicker('refresh');
+    $('#input-spinner').hide()
+  }
   function listenAndUpdateData(elementId, query) {
     const selectElement = $('#'+elementId)
-    bloodhound.search(query, sync, function(results) {
-      selectElement.empty()
-      results.forEach(result => {
-        selectElement.append(makeOptionElement(result));
-      }); 
-      selectElement.selectpicker('refresh');
-      $('#input-spinner').hide()
-    });
+    bloodhound.search(query, function(datums) {
+      //File data results are sync
+      if(dataSource) {
+        responseSyncORAsync(selectElement, datums)
+      }
+    }, function(datums) {
+      //Remote url data results are async
+      if(dataUrl) {
+        responseSyncORAsync(selectElement, datums)
+      }
+    }) 
   }
   const bloodhound = makeBloodHound()
-
-
   selectElementIds.forEach(elementId => {
     const selectInput = getInputField(elementId)
-    selectInput.on('keyup',function(){
-      if(this.value.length > 1) {
+    selectInput.on('input', function() {
+      if(this.value.length == 0) {
+        const selectElement = $('#'+elementId)
+        selectElement.empty()
+        selectElement.selectpicker('refresh');
+        return;
+      }
+      if(this.value.length > 0) {
         $('#input-spinner').show()
         listenAndUpdateData(elementId, this.value)
       }
-    }) 
+    });
   })
 }

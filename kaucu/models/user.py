@@ -32,7 +32,7 @@ class UserQuerySet(models.QuerySet):
   def monthly_margins_agg(self, date_labels):
     months = []
     for date in date_labels:
-      months.append(Coalesce(Sum(date.strftime('%m-%Y')),0))
+      months.append(Sum(date.strftime('%m-%Y')))
     return self.aggregate(*months)
 
 class MyUserManager(UserManager):
@@ -66,7 +66,7 @@ class User(AbstractUser):
   phone = models.CharField(max_length=20, null=True, blank=True)
   mobile = models.CharField(max_length=20, null=True, blank=True)
   company = models.CharField(max_length=100, null=True, blank=True)
-  color = models.CharField(max_length=7, null=True, blank=True)
+  color = models.CharField(max_length=10)
 
   ROLE = Choices(('Admin', 'admin', 'Admin'),('Sales', 'sales', 'Sales'),('Accounts', 'accounts', 'Accounts'))
   role = models.CharField(max_length=20, choices=ROLE)
@@ -81,7 +81,10 @@ class User(AbstractUser):
     super().save(*args, **kwargs)
     
   def __str__(self):
-    return u'{0}'.format(self.first_name+' '+self.last_name)
+    if self.first_name:
+      return u'{0}'.format(self.first_name+' '+self.last_name)
+    else:
+      return self.email
 
 
 

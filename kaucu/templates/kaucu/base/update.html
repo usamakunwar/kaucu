@@ -1,8 +1,6 @@
 {% extends 'kaucu/base/base.html' %}
 {% block content %}
-{% if request.user.is_authenticated %}
-  {% include "kaucu/base/breadcrumb.html" %}
-{% endif %}
+{% include "kaucu/base/breadcrumb.html" %}
 {% include "kaucu/base/form.html" %}
 {% endblock %}
 

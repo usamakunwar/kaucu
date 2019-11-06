@@ -1,8 +1,8 @@
 $('select').selectpicker({
   noneResultsText: '',
 });
-setupSelectFieldData(['id_departure_airport', 'id_arrival_airport'], 'airports', ['iata', 'name'], 'iata');
-setupSelectFieldData(['id_airline'], 'airlines', ['name'], 'name');
-setupSelectFieldData(['id_hotel'], 'hotels');
-setupSelectFieldData(['id_currency'], 'currencies');
-setupSelectRemoteData(['id_user'], 'first_name', ['first_name','last_name']);
+setupSelectData(['id_departure_airport', 'id_arrival_airport'], 'airports', null, ['iata', 'name', 'city'], ['iata', 'name'], null, null );
+setupSelectData(['id_airline'], 'airlines', null, ['name', 'iata'], ['name'], null, null );
+setupSelectData(['id_hotel'], 'hotels', null, null, null, null, null );
+setupSelectData(['id_currency'], 'currencies', null, null, null, null, null );
+setupSelectData(['id_user'], null, '/kaucu/contact/search/', null, ['first_name','last_name'], ['id'], ['slug']);

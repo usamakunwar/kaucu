@@ -4,33 +4,33 @@
 <div class="right-icon"><i class="fas fa-users"></i></div>
 
 {% include "kaucu/base/filter_list.html" %}
-<div class="table-responsive-sm bg-white">
-    <table class="table table-hover">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">First Name</th>
-            <th scope="col">Last Name</th>
-            <th scope="col">Email</th>
-            <th scope="col">Role</th>
-            <th scope="col">Last login</th>
-            <th scope="col">Active</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for object in object_list %}
-          <tr class="cursor" onclick="window.location='{% url 'user:detail' object.slug %}';">
-            <td>{{ object.slug }}</td>
-            <td>{{ object.first_name }}</td>
-            <td>{{ object.last_name }}</td>
-            <td>{{ object.email }}</td>
-            <td>{{ object.role }}</td>
-            <td>{{ object.last_login }}</td>
-            <td>{{ object.is_active }}</td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-  </div>
+<div class="table-responsive-lg bg-in mb-2">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Role</th>
+        <th scope="col">Last login</th>
+        <th scope="col">Active</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for object in object_list %}
+      <tr class="row-click cursor" data-href="{% url 'user:detail' object.slug %}">
+        <td>{{ object.slug }}</td>
+        <td>{{ object.first_name }}</td>
+        <td>{{ object.last_name }}</td>
+        <td>{{ object.email }}</td>
+        <td>{% for group in object.groups.all %} {{group}}, {%endfor%}</td>
+        <td>{{ object.last_login|date:"d/m/y H:i" }}</td>
+        <td>{{ object.is_active }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
 {% include "kaucu/base/paginate.html" %}
 {% endblock %}

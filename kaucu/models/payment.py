@@ -7,12 +7,14 @@ from .user import User
 from model_utils import Choices
 
 class PaymentQuerySet(models.QuerySet):
+  def prefetch(self):
+    return self.prefetch_related('sale_payment_set', 'supplier_payment_set')
   def available_payments(self):
-    sum_salepayment = Sum(Coalesce('salepayment__amount',0))
-    sum_supplierpayment = Sum(Coalesce('supplierpayment__amount',0))
-    query = self.prefetch_related('salepayment_set', 'supplierpayment_set')
-    query = query.annotate(sale_total=sum_salepayment, supplier_total=sum_supplierpayment, available=F('amount')-(F('sale_total')+F('supplier_total')))
-    query = query.order_by('-paidDate')
+    sum_sale_payment = Sum(Coalesce('sale_payment__amount',0))
+    sum_supplier_payment = Sum(Coalesce('supplier_payment__amount',0))
+    query = self.prefetch_related('sale_payment_set', 'supplier_payment_set')
+    query = query.annotate(sale_total=sum_sale_payment, supplier_total=sum_supplier_payment, available=F('amount')-(F('sale_total')+F('supplier_total')))
+    query = query.order_by('-paid_date')
     return query
 
 
@@ -24,12 +26,14 @@ class Payment(models.Model):
 
   currency = models.CharField(max_length=3)
   amount = models.DecimalField(default=0, decimal_places=2, max_digits=8)
-  paidDate = models.DateField()
+  paid_date = models.DateField()
   
   DIRECTION = Choices(('IN', 'IN', 'IN'), ('OUT', 'OUT', 'OUT'))
   direction = models.CharField(max_length=5, choices=DIRECTION)
   METHOD = Choices(('Bank Transfer', 'banktransfer', 'Bank Transfer'), ('Cash', 'cash', 'Cash'), ('Cheque', 'cheque', 'Cheque'))
   method = models.CharField(max_length=20, choices=METHOD)
+
+  available = None
   
   objects = PaymentQuerySet.as_manager()
 
@@ -38,9 +42,19 @@ class Payment(models.Model):
       self.slug = "P"+str(Helpers.randomInt(5))
     super().save(*args, **kwargs)
   
+  # def delete(self, *args, **kwargs):
+  #   local_sale_payments = self.sale_payment_set.all()
+  #   super().delete(*args, **kwargs)
+  #   for sale_payment in self.sale_payment_set.all():
+  #     sale_payment.sale.update_status()
+
+  
   def __str__(self):
-    #Should only use with SalePayment / SupplierPayment
-    return u'{0}'.format(str(self.paidDate)+' Payment '+self.slug+'  '+self.direction+' Available '+self.currency+' : '+str(self.available))
+    payment = str(self.paid_date)+' Payment '+self.slug+'  '+self.direction
+    if self.available:
+      payment += 'Available '+self.currency+' : '+str(self.available)
+    return u'{0}'.format(payment)
+
 
 
 class PaymentAssignForm(forms.ModelForm):

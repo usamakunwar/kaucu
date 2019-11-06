@@ -1,32 +1,11 @@
 {% extends 'kaucu/base/base.html' %}
 {% load myfilters %}
 {% block content %}
-{% if request.user.is_authenticated %}
 {% include "kaucu/base/breadcrumb.html" %}
-{% endif %}
 <div class="right-icon"><i class="fas fa-chart-line"></i></div>
-
-<div class="row">
-  <div class="col-md-6 mb-2 pr-md-2">
-    <a class="row p-4 list-group-item-action cursor align-items-center center bg-in text-primary" href="{% url 'sale:create' %}">
-      <div class="col-sm-12">+ New {{request.resolver_match.namespace}}</div>
-    </a></div>
-  <div class="col-md-5 mb-2 pr-md-2">
-    <a class="row p-4 list-group-item-action cursor align-items-center center bg-in disabled" id="proceed" href="#">
-      <div class="col-sm-12">Proceed</div>
-    </a></div>
-  <div class="col-md-1 mb-2">
-      <a class="row p-4 list-group-item-action cursor align-items-center center bg-in"
-       data-toggle="collapse" href="#filter" role="button" 
-      aria-expanded="false" aria-controls="filterCollapse">
-    <div class="col-sm-12"><i style="position:relative;top:4px;height:24px;" class="fas fa-filter"></i>
-
-    </div>
-  </a></div>
-</div>
-{% include "kaucu/base/filter_form.html" %}
-<div class="table-responsive-sm bg-white">
-  <table class="table">
+{% include "kaucu/base/filter_list.html" %}
+<div class="table-responsive-lg bg-in mb-2">
+  <table class="table table-hover">
       <thead>
         <tr>
           <th scope="col">ID</th>
@@ -45,21 +24,23 @@
       </thead>
       <tbody>
         {% for object in object_list %}
-        <tr>
-          <td><a href="{% url 'sale:detail' object.slug %}">{{ object.slug }}</a></td>
+        <tr class="row-click cursor" data-href="{% url 'sale:detail' object.slug %}">
+          <td>{{ object.slug }}</td>
           <td>{{ object.package }}</td>
-          <td><a href="{% url 'contact:detail' object.user.slug %}">{{ object.user.first_name }} {{ object.user.last_name }}</a></td>
+          <td>{{ object.user.first_name }} {{ object.user.last_name }}</td>
           <td>{{ object.price }}</td>
           <td>{{ object.cost }}</td>
           <td>{{ object.adult }}</td>
           <td>{{ object.child }}</td>
           <td>{{ object.infant }}</td>
           <td class="clr-white center" scope="row"><div class="py-1 px-1 rounded {{object.status|makeClass }}-status">{{ object.status }} </div></td>
-          <td>{{ object.created }}</td>
+          <td>{{ object.created|date:"d/m/y H:i" }}</td>
           <td>{{ object.creator }}</td>
-          <th><button onclick="handleDialog(`{% url 'sale:delete' object.slug %}`)" type="button" class="close text-danger" aria-label="Close">
-            <span aria-hidden="true">&times;</span></button>
-          </th>
+          <td>
+            <button class="close text-danger" onclick="handleDialog(`{% url 'sale:delete' object.slug %}`)" type="button"  aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </td>
         </tr>
         {% endfor %}
       </tbody>

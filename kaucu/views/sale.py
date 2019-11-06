@@ -1,5 +1,5 @@
 from django.urls import reverse
-from kaucu.models import Sale, SalePayment
+from kaucu.models import Sale, Sale_Payment
 from kaucu.mixins import *
 
 from .contact import *
@@ -14,20 +14,19 @@ class SaleForm(forms.ModelForm):
   adult = forms.IntegerField(min_value=0)
   child = forms.IntegerField(min_value=0)
   infant = forms.IntegerField(min_value=0)
-  user = forms.CharField(widget=forms.widgets.Select(attrs={'data-live-search':'true', 'data-live-search-placeholder':'Search by Name or Id'}))
+  user = forms.ModelChoiceField(queryset=User.objects.none(), widget=forms.widgets.Select(attrs={'data-live-search':'true', 'data-live-search-placeholder':'Search by Name or Id'}))
   def __init__(self, *args, **kwargs):
     super().__init__(*args, **kwargs)
-    #User field is related so we do not want a queryset
-    self.fields['user'].queryset = User.objects.none()
     self.fields['user'].empty_label = None
   class Meta:
     model = Sale
     fields = ['user','package', 'status', 'price', 'adult', 'child', 'infant']
   
 class SaleFilter(django_filters.FilterSet):
+  slug = django_filters.CharFilter(label='ID')
   class Meta:
     model = Sale
-    fields = {'status': ['exact'], 'user_id': ['exact'],'slug': ['exact'],}    
+    fields = {'slug': ['exact'], 'status': ['exact']}    
 
 class SaleCreate(ContactChildCreate):
   template_name = 'kaucu/base/update.html'
@@ -38,9 +37,9 @@ class SaleCreate(ContactChildCreate):
     #To ensure the the selected user is valid
     form = super().get_form()
     if 'slug' in self.kwargs:
-      del form.fields['user']
+     del form.fields['user']
     elif self.request.method == 'POST':
-      form.fields['user'].queryset = User.objects.contacts()
+     form.fields['user'].queryset = User.objects.contacts()
     return form
 
 class SaleUpdate(ContactChildUpdate):
@@ -61,7 +60,7 @@ class SaleDetail(ContactChildDetail):
   queryset = Sale.objects.child_prefetch()
   def get_object(self):
     obj = super().get_object()
-    obj.balance_sheet = obj.balance_sheet()
+    obj.balance_sheet = obj.get_balance_sheet()
     obj.totals = obj.balance_sheet.balance_sheet_totals()
     return obj
   
@@ -70,9 +69,6 @@ class SaleList(PermissionMixin, FilterMixin, ListView):
   def get_queryset(self):
     self.filter = SaleFilter(self.request.GET, queryset=super().get_queryset())
     return self.filter.qs
-
-
-
 
 class SaleChildCreate(PermissionMixin, CreateView):
   def form_valid(self, form):

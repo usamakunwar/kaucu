@@ -1,9 +1,8 @@
 {% load myfilters %}
-
-<div class="row collapse bg-white mb-2" id="filter">
-    <div class="col-lg-12 pt-4">
-      <form method="get" class="mb-0">
-        <div class="row">
+<form method="get" class="mb-0">
+  <div class="row collapse {% if filter.data %} show {% endif %}" id="filter">
+    <div class="col-md-10 col-lg-11 pr-md-2 mb-2">
+        <div class="row pb-2 pt-4 bg-in">
           {% for boundfield in filter %}
           <div class="col-6 col-md-3 col-lg-2 mb-sm-3 pl-4 col-form-label-sm">{{ boundfield.label_tag }}</div>
           <div class="col-6 col-md-3 col-lg-2 mb-3 pr-4 pl-4 pl-sm-0">
@@ -16,12 +15,16 @@
           </div>
           {% endfor %}
         </div>
-        <div class="row">
-            <div class="col-md-3 offset-md-9 pl-md-0 col-lg-2 offset-lg-10 pl-4 mb-3 pr-4">
-                <div class="row"><input class="col btn btn-primary btn-sm" type="submit" value="Filter"></div>
-              </div>
-        </div>
-
-      </form>
+    </div>
+    <div class="col-md-2 col-lg-1 m-0">
+      <button class="row p-2 m-0 btn list-group-item-action cursor center bg-in text-primary mb-2" type="submit">
+        <div class="col-12">Filter</div> 
+      </button>    
+      {% if filter.data %}
+      <a href="/{{request.resolver_match.route}}" class="row p-1 m-0 list-group-item-action cursor align-items-center center bg-in" >
+        <div class="col-12"><small class="clr-grey">Reset filter</small></div>
+      </a> 
+      {% endif %} 
     </div>
   </div>
+</form>

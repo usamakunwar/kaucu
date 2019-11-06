@@ -1,8 +1,8 @@
 {% load static %}
 {% load myfilters %}
-
 {% firstof object.slug object.pk as slug_or_pk %}
 <html class="h-100 mdl-js">
+
 <head>
     <link rel="stylesheet" href="{% static 'css/build.css' %}" type="text/css">
 </head>
@@ -69,6 +69,20 @@
   </footer>
   {{ form.media }}
   {% include "kaucu/base/dialog.html" %}
+  <script>
+      $( ".row-click td" ).wrapInner( "<span class=\"cancel-click\"></div>" );
+      //Cancel click for buttond
+      $('.row-click td button').click(function (e) {
+        e.stopPropagation();
+      });
+      //Cancel click for text, so it can be copied
+      $('.row-click .cancel-click').click(function (e) {
+        e.stopPropagation();
+      });
+      $(".row-click").click(function() {
+        window.location = $(this).data("href");
+      });
+    </script>
 </body>
 </html>
 

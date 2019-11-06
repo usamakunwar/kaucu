@@ -1,10 +1,9 @@
 {% extends 'kaucu/base/base.html' %}
 {% load myfilters %}
 {% block content %}
-{% if request.user.is_authenticated %}
 {% include "kaucu/base/breadcrumb.html" %}
-{% endif %}
-{% if perms.change_user %}
+
+{% if perms.kaucu.change_user %}
 <a class="bread-icon clr-m" href="{% url request.resolver_match.namespace|add:':update' slug_or_pk %}">
     <i class="far fa-edit"></i>
 </a>  
@@ -88,11 +87,11 @@
       class="row p-4 list-group-item-action cursor align-items-center center bg-in text-primary" href="{% url 'sale:create' object.slug %}">
       <div class="col-sm-12">+ New Sale</div>
     </a></div>
-  <div class="col-sm-6 mb-2 pl-sm-1"><a
-      class="row p-4 list-group-item-action cursor align-items-center center bg-in disabled" id="proceed"
-      href="/order">
-      <div class="col-sm-12">Proceed</div>
-    </a></div>
+    <div class="col-md-6 mb-2">
+      <div class="row p-4 align-items-center center bg-in clr-white">
+        <div class="col-sm-12 pt-3 pb-2"></div>
+      </div>
+    </div>
 </div>
 
 <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -103,36 +102,47 @@
 </ul>
 <div class="tab-content mt-2" id="myTabContent">
   <div class="tab-pane fade show active" id="sales" role="tabpanel" aria-labelledby="sales-tab">    
-    <div class="table-responsive-sm bg-white">
-        <table class="table table-hover">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Package</th>
-                <th scope="col">Price</th>
-                <th scope="col">Cost</th>
-                <th scope="col">Adult</th>
-                <th scope="col">Child</th>
-                <th scope="col">Infant</th>
-                <th scope="col">Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for item in object.sale_set.all %}
-              <tr class="cursor" onclick="window.location='{% url 'sale:detail' item.slug %}';">
-                <td>{{ item.slug }}</td>
-                <td>{{ item.package }}</td>
-                <td>{{ item.price }}</td>
-                <td>{{ item.cost }}</td>
-                <td>{{ item.adult }}</td>
-                <td>{{ item.child }}</td>
-                <td>{{ item.infant }}</td>
-                <td class="clr-white center" scope="row"><div class="py-1 px-1 rounded {{item.status|makeClass }}-status">{{ item.status }} </div></td>
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-      </div>
+    <div class="table-responsive-lg bg-in mb-2">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Package</th>
+            <th scope="col">Price</th>
+            <th scope="col">Cost</th>
+            <th scope="col">A</th>
+            <th scope="col">C</th>
+            <th scope="col">I</th>
+            <th scope="col">Status</th>
+            <th scope="col">Created</th>
+            <th scope="col">Creator</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in object.sale_set.all %}
+          <tr class="row-click cursor" data-href="{% url 'sale:detail' item.slug %}">
+            <td>{{ item.slug }}</td>
+            <td>{{ item.package }}</td>
+            <td>{{ item.price }}</td>
+            <td>{{ item.cost }}</td>
+            <td>{{ item.adult }}</td>
+            <td>{{ item.child }}</td>
+            <td>{{ item.infant }}</td>
+            <td class="clr-white center" scope="row"><div class="py-1 px-1 rounded {{item.status|makeClass }}-status">{{ item.status }} </div></td>
+            <td>{{ item.created|date:"d/m/y H:i" }}</td>
+            <td>{{ item.creator }}</td>
+            <td>
+              <button class="close text-danger" onclick="handleDialog(`{% url 'sale:delete' item.slug %}`)" type="button"  aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </td>
+          
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
 

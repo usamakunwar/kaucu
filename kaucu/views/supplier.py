@@ -7,7 +7,6 @@ from kaucu.models import  Supplier
 from kaucu.mixins import *
 
 import django_filters
-from django_filters import OrderingFilter
 
 class SupplierFilter(django_filters.FilterSet):
   class Meta:
@@ -42,13 +41,12 @@ class SupplierUpdate(PermissionMixin, UpdateView):
     return reverse('supplier:detail', kwargs=self.kwargs)
 class SupplierDelete(PermissionMixin, DeleteMixin, DeleteView):
   model = Supplier
-  queryset = Supplier.objects.prefetch_related('hotel_set', 'flight_set', 'transfer_set')
   responder_redirect_kwargs = {'path':'supplier:list'}
 
 class SupplierList(PermissionMixin, FilterMixin, ListView):
   model = Supplier  
   def get(self, request, *args, **kwargs):
-    Supplier.objects.update_exchange_rates()
+    Supplier.objects.update_all_supplier_ex_rates()
     return super().get(request, *args, **kwargs)
   def get_queryset(self):
     self.filter = SupplierFilter(self.request.GET, queryset=super().get_queryset())
@@ -58,8 +56,7 @@ class SupplierDetail(PermissionMixin, DetailView):
   queryset = Supplier.objects.services_prefetch()
   def get_object(self):
     obj = super().get_object()
-    obj.balance_sheet = obj.balance_sheet()
-    print(obj.balance_sheet)
+    obj.balance_sheet = obj.get_balance_sheet()
     obj.totals = obj.balance_sheet.balance_sheet_totals()
     return obj
 

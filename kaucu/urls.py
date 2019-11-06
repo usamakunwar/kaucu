@@ -76,13 +76,13 @@ payment_patterns = ([
 ], 'payment')
 
 sale_payment = ([
-    path('<str:slug>/<int:pk>/delete', views.SalePaymentDelete.as_view() , name='delete'),
-    path('<str:slug>/create', views.SalePaymentCreate.as_view() , name='create'),
+    path('<str:slug>/<int:pk>/delete', views.Sale_PaymentDelete.as_view() , name='delete'),
+    path('<str:slug>/create', views.Sale_PaymentCreate.as_view() , name='create'),
 ], 'sale_payment')
 
 supplier_payment = ([
-    path('<int:pk>/delete', views.SupplierPaymentDelete.as_view() , name='delete'),
-    path('<int:pk>/create', views.SupplierPaymentCreate.as_view() , name='create'),
+    path('<int:pk>/delete', views.Supplier_PaymentDelete.as_view() , name='delete'),
+    path('<int:pk>/create', views.Supplier_PaymentCreate.as_view() , name='create'),
 ], 'supplier_payment')
 
 supplier_patterns = ([

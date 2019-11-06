@@ -14,8 +14,8 @@ class FlightForm(forms.ModelForm):
   
   departure_time = forms.DateTimeField(input_formats=settings.DATETIME_INPUT_FORMATS, widget=DatePickerInput(format=settings.DATETIME_INPUT_FORMATS[0]))
   arrival_time = forms.DateTimeField(input_formats=settings.DATETIME_INPUT_FORMATS, widget=DatePickerInput(format=settings.DATETIME_INPUT_FORMATS[0]))
-  departure_airport = forms.CharField(widget=forms.widgets.Select(attrs={'data-live-search':'true', 'data-live-search-placeholder':'Search by Airport Code'}))
-  arrival_airport = forms.CharField(widget=forms.widgets.Select(attrs={'data-live-search':'true', 'data-live-search-placeholder':'Search by Airport Code'}))
+  departure_airport = forms.CharField(widget=forms.widgets.Select(attrs={'data-live-search':'true', 'data-live-search-placeholder':'Search by Airport Code or Name'}))
+  arrival_airport = forms.CharField(widget=forms.widgets.Select(attrs={'data-live-search':'true', 'data-live-search-placeholder':'Search by Airport Code or Name'}))
   airline = forms.CharField(widget=forms.widgets.Select(attrs={'data-live-search':'true', 'data-live-search-placeholder':'Search by Airline'}))
 
   def __init__(self, *args, **kwargs):
@@ -29,7 +29,7 @@ class FlightForm(forms.ModelForm):
 
   class Meta:
     model = Flight
-    fields = ['supplier', 'flight_no','airline', 'seat_class', 'departure_airport', 'departure_time', 'arrival_airport', 'arrival_time', 'adult', 'child', 'infant', 'cost']
+    fields = ['supplier', 'seat_class', 'flight_no','airline', 'departure_airport', 'departure_time', 'arrival_airport', 'arrival_time', 'adult', 'child', 'infant', 'cost']
 
 class FlightCreate(SaleChildCreate):
   template_name = 'kaucu/base/update.html'

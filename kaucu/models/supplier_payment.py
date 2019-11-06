@@ -5,12 +5,12 @@ from .payment import *
 from .payment_child import *
 from django.db.models import Sum, Q
 
-class SupplierPaymentQuerySet(models.QuerySet):
+class Supplier_PaymentQuerySet(models.QuerySet):
   def total_paid(self):
     total = self.aggregate(IN=Coalesce(Sum('amount', filter=Q(payment__direction='IN')),0), OUT=Coalesce(Sum('amount', filter=Q(payment__direction='OUT')),0))
     return total['IN'] - total['OUT']
 
-class SupplierPayment(models.Model):
+class Supplier_Payment(models.Model):
   created = models.DateTimeField(auto_now_add=True)
   last_edit = models.DateTimeField(auto_now=True)
 

@@ -1,9 +1,7 @@
 {% extends 'kaucu/base/base.html' %}
 {% block content %}
-{% if request.user.is_authenticated %}
 {% include "kaucu/base/breadcrumb.html" %}
-{% endif %}
-{% if perms.change_package %}
+{% if perms.kaucu.change_package %}
 <a class="bread-icon clr-m" href="{% url request.resolver_match.namespace|add:':update' slug_or_pk %}">
     <i class="far fa-edit"></i>
 </a>  
@@ -20,7 +18,7 @@
           </div>
           <div class="col-lg-6">
             <div class="row">
-              <div class="col-sm-4 col-lg-4 mb-sm-3 pl-4">Creater</div>
+              <div class="col-sm-4 col-lg-4 mb-sm-3 pl-4">Creator</div>
               <div class="col-sm-8 col-lg-8 mb-3 pr-4 pl-4 pl-sm-0">{{ object.creator }}</div>
             </div>
           </div>

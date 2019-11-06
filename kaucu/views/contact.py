@@ -9,13 +9,12 @@ from django.http import JsonResponse
 
 
 import django_filters
-from django_filters import OrderingFilter
 
 class ContactFilter(django_filters.FilterSet):
-  sort = OrderingFilter(fields=(('first_name', 'first_name'),('last_name', 'last_name'),),field_labels={'first_name': 'User account',})
+  slug = django_filters.CharFilter(label='ID')
   class Meta:
     model = User
-    fields = {'email': ['contains'], 'first_name': ['contains'], 'last_name': ['contains'],'postcode': ['contains'],'slug': ['contains'],}    
+    fields = {'slug': ['exact'], 'email': ['contains'], 'first_name': ['contains'], 'last_name': ['contains'],'postcode': ['contains']}    
 
 class ContactCreate(PermissionMixin, CreateView):
   model = User

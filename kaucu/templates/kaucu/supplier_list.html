@@ -4,7 +4,7 @@
 
 {% include "kaucu/base/breadcrumb.html" %}
 {% include "kaucu/base/filter_list.html" %}
-<div class="table-responsive-sm bg-white">
+<div class="table-responsive-lg bg-in mb-2">
   <table class="table table-hover">
       <thead>
         <tr>
@@ -15,7 +15,7 @@
       </thead>
       <tbody>
         {% for object in object_list %}
-        <tr class="cursor" onclick="window.location='{% url 'supplier:detail' object.pk %}';">
+        <tr class="row-click cursor" data-href="{% url 'supplier:detail' object.pk %}">
           <td>{{ object.supplier }}</td>
           <td>{{ object.currency }}</td>
           <td>{{ object.currency_rate }}</td>

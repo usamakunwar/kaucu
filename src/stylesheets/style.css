@@ -169,14 +169,13 @@
 .clr-m {
   color:#455a64;
 }
-.color-grey {
-  color:#e4e4e4;
-}
+
 .clr-white {
     color:#ffffff;
   }
-
-
+.clr-grey {
+  color:#797979;
+}
 
 .center {
   text-align: center;
@@ -283,10 +282,15 @@ h7 {
   right: 10px;
   top: 10px;
 }
-
-.height100 {
-  min-height:100px;
+.h-10 {
+  min-height:10%;
 } 
+.h-65 {
+  min-height:65%;
+} 
+.m-10p {
+  margin-top:10%;
+}
 
 .bgIncomplete {
   background-color:#e2ad00;
@@ -398,3 +402,15 @@ iframe {
   top: 4px;
   color: #e4e4e4;
 }
+.breadcrumb-item+.breadcrumb-item::before {
+  content: '>';
+}
+.btn {
+  border-radius: 0;
+}
+.collapse.in {
+  height: auto !important;
+}
+.cancel-click {
+  cursor: text;
+} 

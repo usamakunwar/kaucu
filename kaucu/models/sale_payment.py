@@ -5,7 +5,7 @@ from .payment import *
 from .payment_child import *
 from django.db.models import Sum, Q
 
-class SalePayment(models.Model):
+class Sale_Payment(models.Model):
   created = models.DateTimeField(auto_now_add=True)
   last_edit = models.DateTimeField(auto_now=True)
   sale = models.ForeignKey(Sale, on_delete=models.CASCADE)

@@ -10,13 +10,12 @@ from django.db.models import *
 
 from model_utils import Choices
 from datetime import date
-import datedelta
 
 class SaleQuerySet(models.QuerySet):
   def services_prefetch(self):
-    return self.prefetch_related('hotel_set', 'flight_set', 'transfer_set', 'salepayment_set')
+    return self.prefetch_related('hotel_set', 'flight_set', 'transfer_set', 'sale_payment_set')
   def child_prefetch(self):
-    return self.prefetch_related('hotel_set', 'flight_set', 'transfer_set', 'salepayment_set', 'passenger_set')
+    return self.prefetch_related('hotel_set', 'flight_set', 'transfer_set', 'sale_payment_set', 'passenger_set')
 
 class Sale(models.Model):
   created = models.DateTimeField(auto_now_add=True)
@@ -57,9 +56,9 @@ class Sale(models.Model):
     self.save(update_fields=['cost'])
 
   def update_status(self):
-    from kaucu.models import SalePayment
+    from kaucu.models import Sale_Payment
     ##Confirmed date = Date of first payment
-    confirmed_date = SalePayment.objects.filter(sale=self).aggregate(date=Min('payment__paidDate'))['date']
+    confirmed_date = Sale_Payment.objects.filter(sale=self).aggregate(date=Min('payment__paid_date'))['date']
     if confirmed_date:
       if self.status != self.STATUS.confirmed:
         self.status = self.STATUS.confirmed
@@ -70,10 +69,10 @@ class Sale(models.Model):
       self.confirmed_date = None
       self.save(update_fields=['status','confirmed_date'])
 
-  def balance_sheet(self):    
+  def get_balance_sheet(self):    
     payment_in = Case(When(payment__direction='IN', then='amount'), default=0)
     payment_out = Case(When(payment__direction='OUT', then='amount'), default=0)
-    payment = self.salepayment_set.all().values(paid_date=F('payment__paidDate'), out_payment=payment_out, in_payment=payment_in, payment_slug=F('payment__slug'), pk=F('pk'))
+    payment = self.sale_payment_set.all().values(paid_date=F('payment__paid_date'), out_payment=payment_out, in_payment=payment_in, payment_slug=F('payment__slug'), pk=F('pk'))
     return payment.order_by('-paid_date')
 
 

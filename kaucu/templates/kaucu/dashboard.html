@@ -1,7 +1,8 @@
 {% extends 'kaucu/base/base.html' %}
+{% load static %}
 {% block content %}
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+<script src="{% static 'js/chart.js' %}"></script>
 
 <div class="row px-4 py-4"><h1>
    Welcome
@@ -13,11 +14,11 @@
     <div class="col-sm-12 col-lg-4 mb-2 pr-md-2">
       <div class="row p-4 bg-in mb-2">
         <div class="col-6">Total ({{current_month}})</h4></div>
-        <div class="col-6"><h4>£{{current_month_total}}</h4></div>
+        <div class="col-6"><h4>£{{current_month_total|floatformat}}</h4></div>
       </div>
       <div class="row p-4 bg-in mb-2">
           <div class="col-6">Total ({{current_year}})</h4></div>
-          <div class="col-6"><h4>£{{current_year_total}}</h4></div>
+          <div class="col-6"><h4>£{{current_year_total|floatformat}}</h4></div>
         </div>
     </div>
     <div class="col-sm-12 col-lg-8 mb-2 pr-md-2">
@@ -27,23 +28,23 @@
     </div>
 </div>
 
+{% if chart_data|length > 0 %}
 <script>
-var options = {
-  tooltips: { mode: 'x'},
-  elements: {line: {tension: 0.4, fill: false }},
-};
-
-var data = {
-    labels: {{chart_labels|safe}},
-    datasets: {{chart_data|safe}}
-};
-
-var ctx = document.getElementById('myLineChart');
-var myLineChart = new Chart(ctx, {
-    type: 'line',
-    data: data,
-    options:options,
-});
+  var options = {
+    tooltips: { mode: 'x'},
+    elements: {line: {tension: 0.4, fill: false }},
+  };
+  var data = {
+      labels: {{chart_labels|safe}},
+      datasets: {{chart_data|safe}}
+  };
+  var ctx = document.getElementById('myLineChart');
+  var myLineChart = new Chart(ctx, {
+      type: 'line',
+      data: data,
+      options:options,
+  });
 </script>
+{% endif %}
 
 {% endblock %}

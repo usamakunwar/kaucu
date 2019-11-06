@@ -7,20 +7,20 @@ from kaucu.mixins import *
 from kaucu.models import  Payment, Sale
 
 import django_filters
-from django_filters import OrderingFilter
 from django.conf import settings
 
 class PaymentFilter(django_filters.FilterSet):
+  slug = django_filters.CharFilter(label='ID')
   class Meta:
     model = Payment
-    fields = {'direction': ['exact'], 'paidDate': ['contains'], 'method': ['contains'] }    
+    fields = {'slug': ['exact'],'direction': ['exact'], 'paid_date': ['contains'], 'method': ['contains'] }    
 
 class PaymentForm(forms.ModelForm):
-  paidDate = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS, widget=DatePickerInput(format=settings.DATE_INPUT_FORMATS[0]))
+  paid_date = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS, widget=DatePickerInput(format=settings.DATE_INPUT_FORMATS[0]))
   currency = forms.CharField(widget=forms.widgets.Select(attrs={'data-live-search':'true', 'data-live-search-placeholder':'Search by code'}))
   class Meta:
     model = Payment
-    fields = ['direction', 'method', 'paidDate', 'currency', 'amount']
+    fields = ['direction', 'method', 'paid_date', 'currency', 'amount']
 
 class PaymentCreate(PermissionMixin, CreateView):
   model = Payment
@@ -36,8 +36,9 @@ class PaymentDelete(PermissionMixin, DeleteMixin, DeleteView):
   responder_redirect_kwargs = {'path':'payment:list'}
 class PaymentList(PermissionMixin, FilterMixin, ListView):
   model = Payment  
+  ordering = '-paid_date'
+  queryset = Payment.objects.prefetch()
   def get_queryset(self):
     self.filter = PaymentFilter(self.request.GET, queryset=super().get_queryset())
     return self.filter.qs
-
 
