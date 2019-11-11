@@ -12,10 +12,17 @@ from model_utils import Choices
 from datetime import date
 
 class SaleQuerySet(models.QuerySet):
-  def services_prefetch(self):
-    return self.prefetch_related('hotel_set', 'flight_set', 'transfer_set', 'sale_payment_set')
-  def child_prefetch(self):
-    return self.prefetch_related('hotel_set', 'flight_set', 'transfer_set', 'sale_payment_set', 'passenger_set')
+  def restrict_creator(self, user):
+    #If user is Admin or SuperAdmin show all sale objects, or else only show the created by user
+    if user.groups.filter(name='Admin').exists() or user.is_superuser:
+      return self
+    else:
+      return self.filter(creator=user)
+  def with_related(self):
+    return self.select_related('user', 'package', 'creator')
+  def with_prefetch_related(self):
+    return self.with_related().prefetch_related('hotel_set', 'flight_set', 'transfer_set', 'sale_payment_set', 'passenger_set')
+
 
 class Sale(models.Model):
   created = models.DateTimeField(auto_now_add=True)
@@ -50,8 +57,8 @@ class Sale(models.Model):
     self.cost = 0
     service_classes = [Hotel,Flight,Transfer]
     for service_class in service_classes:
+      #Get all of the service type for this sale
       services = service_class.objects.filter(sale=self)
-      services.update(currency_rate=Subquery(Supplier.objects.filter(id=OuterRef('supplier_id')).values('currency_rate')))   ##update rate if needed
       self.cost += services.aggregate(t=Coalesce(Sum(F('cost')/F('currency_rate')),0))['t']
     self.save(update_fields=['cost'])
 
@@ -72,13 +79,14 @@ class Sale(models.Model):
   def get_balance_sheet(self):    
     payment_in = Case(When(payment__direction='IN', then='amount'), default=0)
     payment_out = Case(When(payment__direction='OUT', then='amount'), default=0)
-    payment = self.sale_payment_set.all().values(paid_date=F('payment__paid_date'), out_payment=payment_out, in_payment=payment_in, payment_slug=F('payment__slug'), pk=F('pk'))
-    return payment.order_by('-paid_date')
+    sale_payments = self.sale_payment_set.all().values(paid_date=F('payment__paid_date'), out_payment=payment_out, in_payment=payment_in, payment_slug=F('payment__slug'), pk=F('pk'))
+    return sale_payments.order_by('-paid_date')
 
 
 
 
-
+    #services.update(currency_rate=Subquery(Supplier.objects.filter(id=OuterRef('supplier_id')).values('currency_rate')))   ##update rate if needed
+    
     # hotel_total = Hotel.objects.filter(sale=self).aggregate(t=Coalesce(Sum(F('cost')/F('currency_rate')),0))
     # flight_total = Flight.objects.filter(sale=self).aggregate(t=Coalesce(Sum(F('cost')/F('currency_rate')),0))
     # transfer_total = Transfer.objects.filter(sale=self).aggregate(t=Coalesce(Sum(F('cost')/F('currency_rate')),0))

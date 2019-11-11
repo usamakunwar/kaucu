@@ -1,4 +1,6 @@
 from django import template
+from django.utils.safestring import mark_safe
+from django.urls import reverse
 
 register = template.Library()
 
@@ -42,3 +44,31 @@ def makeClass(value):
 @register.filter
 def has_group(user, group_name):
     return user.groups.filter(name=group_name).exists() 
+
+@register.filter(is_safe=True)
+def create_button_slug(name, slug):
+  return make_button(name, reverse(name+':create', kwargs={'slug':slug}))
+
+@register.filter(is_safe=True)
+def create_button_slug_disabled(name, slug):
+  return make_button(name, reverse(name+':create', kwargs={'pk':pk}))
+
+def make_button(name, create_url, enabled):
+  return mark_safe("""  
+  <div class="row">
+    <div class="col-sm-6 mb-2 pr-sm-2">
+      <a class="row p-4 list-group-item-action cursor align-items-center center bg-in
+        {% if perms.kaucu.add_"""+name+""" %} 
+        text-primary" href="""+create_url+"""
+        {% else %}
+        disabled" href="#"
+        {% endif %}>
+        <div class="col-sm-12">+ New """+name+"""</div>
+      </a></div>
+      <div class="col-md-6 mb-2">
+        <div class="row p-4 align-items-center center bg-in clr-white">
+          <div class="col-sm-12 pt-3 pb-2"></div>
+        </div>
+      </div>
+  </div>
+  """)

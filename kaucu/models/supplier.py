@@ -34,7 +34,6 @@ class Supplier(models.Model):
   objects = SupplierQuerySet.as_manager()
   
   def save(self, *args, **kwargs):
-    print(self.currency_rate)
     self.currency_rate = CurrencyLayer().exchangeRate(self.currency)
     super().save(*args, **kwargs)
 
@@ -53,10 +52,10 @@ class Supplier(models.Model):
     payment_out = Case(When(payment__direction='OUT', then='amount'), default=0)    
     confirmed = Q(sale__status='Confirmed')
 
-    payment = self.supplier_payment_set.all().values(paid_date=F('payment__paid_date'), out_payment=payment_out, in_payment=payment_in, package=blank_val, slug=F('payment__slug'), service=blank_val)
-    hotels = self.hotel_set.filter(confirmed).values(paid_date=F('sale__confirmed_date'), out_payment=zero_val, in_payment=F('cost') , package=F('sale__package__package'), slug=F('sale__slug'), service=hotel_val)
-    flights = self.flight_set.filter(confirmed).values(paid_date=F('sale__confirmed_date'), out_payment=zero_val, in_payment=F('cost'), package=F('sale__package__package'), slug=F('sale__slug'), service=flight_val)
-    transfer = self.transfer_set.filter(confirmed).values(paid_date=F('sale__confirmed_date'), out_payment=zero_val, in_payment=F('cost'), package=F('sale__package__package'), slug=F('sale__slug'), service=transfer_val)
+    supplier_payments = self.supplier_payment_set.all().values(paid_date=F('payment__paid_date'), out_payment=payment_out, in_payment=payment_in, package=blank_val, slug=F('payment__slug'), pk=F('pk'), service=blank_val)
+    hotels = self.hotel_set.filter(confirmed).values(paid_date=F('sale__confirmed_date'), out_payment=zero_val, in_payment=F('cost') , package=F('sale__package__package'), slug=F('sale__slug'), pk=F('pk'), service=hotel_val)
+    flights = self.flight_set.filter(confirmed).values(paid_date=F('sale__confirmed_date'), out_payment=zero_val, in_payment=F('cost'), package=F('sale__package__package'), slug=F('sale__slug'), pk=F('pk'), service=flight_val)
+    transfer = self.transfer_set.filter(confirmed).values(paid_date=F('sale__confirmed_date'), out_payment=zero_val, in_payment=F('cost'), package=F('sale__package__package'), slug=F('sale__slug'), pk=F('pk'), service=transfer_val)
 
-    return payment.union(hotels, flights, transfer).order_by('-paid_date')
+    return supplier_payments.union(hotels, flights, transfer).order_by('-paid_date')
 

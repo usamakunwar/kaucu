@@ -54,7 +54,7 @@ class UserDelete(AdminAccessMixin, DeleteMixin, DeleteView):
 class UserDetail(PermissionMixin, DetailView):
   model = User
   queryset = User.objects.users()
-class UserList(PermissionMixin, FilterMixin, ListView):
+class UserList(AdminAccessMixin, FilterMixin, ListView):
   model = User  
   queryset = User.objects.users()
   def get_queryset(self):

@@ -1,11 +1,12 @@
 {% extends 'kaucu/base/base.html' %}
 {% load myfilters %}
 {% block content %}
-{% include "kaucu/base/breadcrumb.html" %}
+{% include "kaucu/base/title.html" %}
 {% if request.user|has_group:'Admin' or request.user.is_superuser %}
-<a class="bread-icon clr-m" href="{% url request.resolver_match.namespace|add:':update' slug_or_pk %}">
-    <i class="far fa-edit"></i>
-</a>  
+  {% include "kaucu/base/breadcrumb.html" %}
+  <a class="bread-icon clr-m" href="{% url request.resolver_match.namespace|add:':update' slug_or_pk %}">
+      <i class="far fa-edit"></i>
+  </a>  
 {% endif %}   
 <div class="row">
     <div class="col-lg-12 bg-in py-4 mb-2">
@@ -22,31 +23,32 @@
                 <div class="col-sm-8 col-lg-8 mb-3 pr-4 pl-4 pl-sm-0">{{ object.creator|default_if_none:"" }}</div>
               </div>
             </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-6">
-            <div class="row">
-              <div class="col-sm-4 col-lg-4 mb-sm-3 pl-4">First Name</div>
-              <div class="col-sm-8 col-lg-8 mb-3 pr-4 pl-4 pl-sm-0">{{ object.first_name }}</div>
+            <div class="col-lg-6">
+              <div class="row">
+                <div class="col-sm-4 col-lg-4 mb-sm-3 pl-4">First Name</div>
+                <div class="col-sm-8 col-lg-8 mb-3 pr-4 pl-4 pl-sm-0">{{ object.first_name }}</div>
+              </div>
             </div>
-          </div>
-          <div class="col-lg-6">
-            <div class="row">
-              <div class="col-sm-4 col-lg-4 mb-sm-3 pl-4">Last Name</div>
-              <div class="col-sm-8 col-lg-8 mb-3 pr-4 pl-4 pl-sm-0">{{ object.last_name }}</div>
+            <div class="col-lg-6">
+              <div class="row">
+                <div class="col-sm-4 col-lg-4 mb-sm-3 pl-4">Last Name</div>
+                <div class="col-sm-8 col-lg-8 mb-3 pr-4 pl-4 pl-sm-0">{{ object.last_name }}</div>
+              </div>
             </div>
-          </div>
-        </div>
-        <div class="row">
+            <div class="col-lg-6">
+              <div class="row">
+                <div class="col-sm-4 col-lg-4 mb-sm-3 pl-4">Color</div>
+                <div class="col-sm-8 col-lg-8 mb-3 pr-4 pl-4 pl-sm-0">{{ object.color }}</div>
+              </div>
+            </div>
             <div class="col-lg-6">
               <div class="row">
                 <div class="col-sm-4 col-lg-4 mb-sm-3 pl-4">Group</div>
                 <div class="col-sm-8 col-lg-8 mb-3 pr-4 pl-4 pl-sm-0">{% for group in object.groups.all %}{{group}} {%endfor%}</div>
               </div>
             </div>
-          </div>
-        
-      </div>
+        </div>
+    </div>
 </div>
 
 {% endblock %}

@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'bootstrap_datepicker_plus',
     'django_filters',
 ]
 
@@ -136,8 +135,8 @@ LOGIN_REDIRECT_URL = '/kaucu/'
 LOGIN_URL = 'login'
 LOGOUT_REDIRECT_URL = 'login'
 
-DATE_INPUT_FORMATS = ['%d/%m/%y']
-DATETIME_INPUT_FORMATS = ['%d/%m/%y %H:%M']
+DATE_INPUT_FORMATS = ['%d/%m/%Y']
+DATETIME_INPUT_FORMATS = ['%d/%m/%Y %H:%M']
 
 def FILTERS_VERBOSE_LOOKUPS():
     from django_filters.conf import DEFAULTS

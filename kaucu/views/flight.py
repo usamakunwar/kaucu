@@ -1,6 +1,6 @@
 from django.urls import reverse
 from django import forms
-from bootstrap_datepicker_plus import DatePickerInput
+from kaucu.widgets import DateTimePickerInput
 
 from kaucu.models import Flight
 from .sale import SaleChildCreate, SaleChildUpdate, SaleChildDelete
@@ -12,8 +12,8 @@ class FlightForm(forms.ModelForm):
   child = forms.IntegerField(min_value=0)
   infant = forms.IntegerField(min_value=0)
   
-  departure_time = forms.DateTimeField(input_formats=settings.DATETIME_INPUT_FORMATS, widget=DatePickerInput(format=settings.DATETIME_INPUT_FORMATS[0]))
-  arrival_time = forms.DateTimeField(input_formats=settings.DATETIME_INPUT_FORMATS, widget=DatePickerInput(format=settings.DATETIME_INPUT_FORMATS[0]))
+  departure_time = forms.DateTimeField(input_formats=settings.DATETIME_INPUT_FORMATS, widget=DateTimePickerInput())
+  arrival_time = forms.DateTimeField(input_formats=settings.DATETIME_INPUT_FORMATS, widget=DateTimePickerInput())
   departure_airport = forms.CharField(widget=forms.widgets.Select(attrs={'data-live-search':'true', 'data-live-search-placeholder':'Search by Airport Code or Name'}))
   arrival_airport = forms.CharField(widget=forms.widgets.Select(attrs={'data-live-search':'true', 'data-live-search-placeholder':'Search by Airport Code or Name'}))
   airline = forms.CharField(widget=forms.widgets.Select(attrs={'data-live-search':'true', 'data-live-search-placeholder':'Search by Airline'}))

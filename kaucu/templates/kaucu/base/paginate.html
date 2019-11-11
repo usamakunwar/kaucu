@@ -1,22 +1,21 @@
 {% load myfilters %}
-
 <nav>
     <ul class="pagination pagination-sm">
       <li class="{% if page_obj.has_previous == false %} disabled {% endif %} page-item">
         <a class="page-link brdr-none mr-1" 
-        {% if page_obj.has_previous %} href="?page={{ page_obj.previous_page_number }}" {% endif %} aria-label="Previous">
+        {% if page_obj.has_previous %} href="?page={{ page_obj.previous_page_number }}{{filter_url}}" {% endif %} aria-label="Previous">
           <span aria-hidden="true">&laquo;</span>
           <span class="sr-only">Previous</span>
         </a>
       </li>
       {% with startFrom=page_obj.number|startAndEnd:paginator.num_pages %}
         {% for i in paginator.page_range|slice:startFrom %}
-          <li class="{% if page_obj.number == i %} active {% endif %}page-item"><a class="page-link brdr-none mr-1" href="?page={{i}}">{{i}}</a></li>
+          <li class="{% if page_obj.number == i %} active {% endif %}page-item"><a class="page-link brdr-none mr-1" href="?page={{i}}{{filter_url}}">{{i}}</a></li>
         {% endfor %}
       {% endwith %}
       <li class="{% if page_obj.has_next == true %} disabled {% endif %} page-item">
         <a class="page-link brdr-none" 
-        {% if page_obj.has_next %} href="?page={{ page_obj.next_page_number }}" {% endif %} aria-label="Next">
+        {% if page_obj.has_next %} href="?page={{ page_obj.next_page_number }}{{filter_url}}" {% endif %} aria-label="Next">
           <span aria-hidden="true">&raquo;</span>
           <span class="sr-only">Next</span>
         </a>

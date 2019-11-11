@@ -1,25 +1,38 @@
 {% extends "kaucu/base/base.html" %}
+{% load myfilters %}
 
-{% block content %}
-<div class="row px-4 py-2"><h1>Login</h1></div>
+{% block loginform %}
 
-{% if form.errors %}
-<div class="invalid-feedback">
-  <p>Your username and password didn't match. Please try again.</p>
-</div>
-{% endif %}
+<form class="mb-0" method="post">{% csrf_token %}
+  <div class="login-form">
+      <div class="row px-4 py-3 center"><h1>Login</h1></div>
+      <div class="row bg-in p-4">
+          {% if form.errors %}
+          <div class="invalid-feedback">
+            <p>Your username and password didn't match. Please try again.</p>
+          </div>
+          {% endif %}
+          {% if next %}
+            {% if user.is_authenticated %}
+            <div class="invalid-feedback">
+                <p>Your account doesn't have access to this page</p>
+            </div>
+            {% else %}
+            <div class="invalid-feedback">
+                <p>Please login to see this page.</p>
+            </div>
+            {% endif %}
+          {% endif %}
+          <div class="col-12 mb-2">Email</div>
+          <div class="col-12 mb-3">{{ form.username|addclass:'form-control' }}</div>          
+          <div class="col-12 mb-2">Password</div>
+          <div class="col-12 mb-4">{{ form.password|addclass:'form-control' }}</div>
+          <button class="col-12 py-1 btn btn-primary" type="submit">Login</button>
+      </div> 
+  </div>
+ 
+  </form>
 
-{% if next %}
-    {% if user.is_authenticated %}
-    <p>Your account doesn't have access to this page. To proceed,
-    please login with an account that has access.</p>
-    {% else %}
-    <p>Please login to see this page.</p>
-    {% endif %}
-{% endif %}
-
-{% include "kaucu/base/form.html" %}
-
-<p><a href="{% url 'password_reset' %}">Lost password?</a></p>
+<!-- <p><a href="{% url 'password_reset' %}">Lost password?</a></p> -->
 
 {% endblock %}

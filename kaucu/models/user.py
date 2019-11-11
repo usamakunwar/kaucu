@@ -7,21 +7,25 @@ from django.db.models.functions import Coalesce
 from model_utils import Choices
 
 class UserQuerySet(models.QuerySet):
-  def users(self):
-    return self.filter(is_staff=True)
+  def restrict_creator(self, user):
+    #If user is Admin or SuperAdmin show all sale objects, or else only show the created by user
+    if user.groups.filter(name='Admin').exists() or user.is_superuser:
+      return self
+    else:
+      return self.filter(creator=user)
+
+  def with_related(self):
+    return self.select_related('creator')
+
   def contacts(self):
     return self.filter(is_staff=False)
-  def search_contacts(self, query):
-    query_split = query.split()
-    if len(query_split) == 2:
-      users = self.contacts().filter(Q(first_name__icontains=query_split[0]) | Q(last_name__icontains=query_split[1])).values('id', 'slug','first_name', 'last_name')
-    elif len(query_split) == 1:
-      users = self.contacts().filter(Q(first_name__icontains=query) | Q(last_name__icontains=query) | Q(slug__istartswith=query)).values('id', 'slug','first_name', 'last_name')
-    return users
+  def users(self):
+    return self.filter(is_staff=True)
   def contact_sales(self):
     return self.contacts().prefetch_related('sale_set')
   def created_sales(self):
     return self.users().prefetch_related('created_sales')
+  
   def monthly_margins(self, date_labels):
     to_sum = F('created_sales__price')-F('created_sales__cost')
     months = {}
@@ -34,22 +38,33 @@ class UserQuerySet(models.QuerySet):
     for date in date_labels:
       months.append(Sum(date.strftime('%m-%Y')))
     return self.aggregate(*months)
+  def search_contacts(self, query):
+    query_split = query.split()
+    if len(query_split) == 2:
+      users = self.contacts().filter(Q(first_name__icontains=query_split[0]) | Q(last_name__icontains=query_split[1])).values('id', 'slug','first_name', 'last_name')
+    elif len(query_split) == 1:
+      users = self.contacts().filter(Q(first_name__icontains=query) | Q(last_name__icontains=query) | Q(slug__istartswith=query)).values('id', 'slug','first_name', 'last_name')
+    return users
 
 class MyUserManager(UserManager):
   def get_queryset(self):
       return UserQuerySet(self.model, using=self._db)
+  def restrict_creator(self, user):
+      return self.get_queryset().restrict_creator(user)
+  def with_related(self):
+      return self.get_queryset().with_related()
   def users(self):
       return self.get_queryset().users()
   def contacts(self):
       return self.get_queryset().contacts()
-  def search_contacts(self, query):
-      return self.get_queryset().search_contacts(query)
   def contact_sales(self):
       return self.get_queryset().contact_sales()
   def monthly_margins(self, date_labels):
       return self.get_queryset().monthly_margins(date_labels)
   def monthly_margins_agg(self, date_labels):
       return self.get_queryset().monthly_margins_agg(date_labels)
+  def search_contacts(self, query):
+      return self.get_queryset().search_contacts(query)
 
 class User(AbstractUser):
   created = models.DateTimeField(auto_now_add=True)

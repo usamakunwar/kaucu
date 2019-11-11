@@ -1,6 +1,5 @@
 from django.urls import reverse
 from django import forms
-from bootstrap_datepicker_plus import DatePickerInput
 
 from django.views.generic import *
 from kaucu.models import  Supplier

@@ -1,19 +1,36 @@
 <script>
+
 function handleDialog(srcURL) {
-  $('#alertContent').empty()
-  $('#alertContent').append("<iframe class='embed-responsive-item' width='100%' height='200' src='"+srcURL+"'></iframe>")
+  //Display the alert and make invisible to calculate height of the src
+  $("#alert").addClass("d-block invisible")  
+  $('#modal-iframe').attr("src", srcURL)
   $('#AlertButton').click()
-}
+} 
+
 function hideDialog() {
   $('#alertDismiss').click()
 }
+function changeHeight(obj) {
+  //iframe loads without src
+  if(obj.src == '') {
+    return;
+  }
+  var height = obj.contentWindow.document.body.scrollHeight
+  if(height > 0) {
+    obj.style.height = height
+  }
+  //Once we have the height, remove the added classes
+  $("#alert").removeClass("d-block invisible")
+}
 </script>
+
+
 
 <button class="hide" id="AlertButton" data-toggle="modal"  data-target="#alert" ></button>
 <div class="modal fade" id="alert" tabindex="-1" role="dialog" aria-labelledby="alertHeading" aria-hidden="true">
-  <div class="modal-dialog p-0 modal-lg" role="document">
-    <div class="modal-content">
-      <div class="p-3" id="alertContent"></div>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content pt-3">
+      <iframe onload="changeHeight(this)" id="modal-iframe"></iframe>
       <button class="top-right-icon close" id="alertDismiss" type="button" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">×</span>
       </button>

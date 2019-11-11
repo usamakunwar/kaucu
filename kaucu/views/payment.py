@@ -1,6 +1,6 @@
 from django.urls import reverse
 from django import forms
-from bootstrap_datepicker_plus import DatePickerInput
+from kaucu.widgets import DatePickerInput
 
 from django.views.generic import *
 from kaucu.mixins import *
@@ -9,17 +9,20 @@ from kaucu.models import  Payment, Sale
 import django_filters
 from django.conf import settings
 
+
 class PaymentFilter(django_filters.FilterSet):
   slug = django_filters.CharFilter(label='ID')
+  paid_date = django_filters.DateFilter(input_formats=settings.DATE_INPUT_FORMATS, widget=DatePickerInput())
   class Meta:
     model = Payment
-    fields = {'slug': ['exact'],'direction': ['exact'], 'paid_date': ['contains'], 'method': ['contains'] }    
+    fields = {'slug': ['exact'],'direction': ['exact'], 'method': ['contains'] }    
 
 class PaymentForm(forms.ModelForm):
-  paid_date = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS, widget=DatePickerInput(format=settings.DATE_INPUT_FORMATS[0]))
+  paid_date = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS, widget=DatePickerInput())
   currency = forms.CharField(widget=forms.widgets.Select(attrs={'data-live-search':'true', 'data-live-search-placeholder':'Search by code'}))
   class Meta:
     model = Payment
+
     fields = ['direction', 'method', 'paid_date', 'currency', 'amount']
 
 class PaymentCreate(PermissionMixin, CreateView):

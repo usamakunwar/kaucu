@@ -42,11 +42,11 @@ class ContactDetail(PermissionMixin, DetailView):
   queryset = User.objects.contact_sales()
 class ContactList(PermissionMixin, FilterMixin, ListView):
   model = User  
-  queryset = User.objects.contacts()
   #Setting this template here, becuase model is User but we need to use contact template
   template_name = 'kaucu/contact_list.html'
   def get_queryset(self):
-    self.filter = ContactFilter(self.request.GET, queryset=super().get_queryset())
+    queryset = User.objects.restrict_creator(self.request.user).contacts().with_related().order_by(self.ordering)
+    self.filter = ContactFilter(self.request.GET, queryset=queryset)
     return self.filter.qs 
 
 
@@ -72,7 +72,7 @@ class ContactChildDetail(PermissionMixin, DetailView):
     breadcrumbs = []
     breadcrumbs.append((reverse('contact:list'), 'Contacts'))
     breadcrumbs.append((reverse('contact:detail', kwargs={'slug':self.object.user.slug}), self.object.user))
-    context['breadcrumbs'] = breadcrumbs      
+    context['breadcrumbs'] = breadcrumbs 
     return context  
 class ContactChildCreate(PermissionMixin, CreateView):
   def get_context_data(self, **kwargs):

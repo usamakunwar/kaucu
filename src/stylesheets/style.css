@@ -414,3 +414,14 @@ iframe {
 .cancel-click {
   cursor: text;
 } 
+@media (min-width: 1200px) {
+  .container{
+      max-width: 1200px;
+  }
+}
+.login-form {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+}

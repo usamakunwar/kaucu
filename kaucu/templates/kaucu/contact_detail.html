@@ -1,6 +1,7 @@
 {% extends 'kaucu/base/base.html' %}
 {% load myfilters %}
 {% block content %}
+{% include "kaucu/base/title.html" %}
 {% include "kaucu/base/breadcrumb.html" %}
 
 {% if perms.kaucu.change_user %}
@@ -82,16 +83,11 @@
         </div>
       </div>
 </div>
+
 <div class="row">
-  <div class="col-sm-6 mb-2 pr-sm-1"><a
-      class="row p-4 list-group-item-action cursor align-items-center center bg-in text-primary" href="{% url 'sale:create' object.slug %}">
-      <div class="col-sm-12">+ New Sale</div>
-    </a></div>
-    <div class="col-md-6 mb-2">
-      <div class="row p-4 align-items-center center bg-in clr-white">
-        <div class="col-sm-12 pt-3 pb-2"></div>
-      </div>
-    </div>
+  {% with perm_name='sale' slug=object.slug has_filter=False %}
+    {% include "kaucu/base/buttons.html" %}
+  {% endwith %}
 </div>
 
 <ul class="nav nav-tabs" id="myTab" role="tablist">

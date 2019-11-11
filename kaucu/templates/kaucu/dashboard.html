@@ -27,14 +27,24 @@
       </div>
     </div>
 </div>
-
 {% if chart_data|length > 0 %}
 <script>
   var options = {
-    tooltips: { mode: 'x'},
+    tooltips: { mode: 'x', position:'nearest'},
     elements: {line: {tension: 0.4, fill: false }},
+    scales: {
+        yAxes: [{
+                ticks: {
+                    beginAtZero:true,
+                    min: 0, // minimum value
+                    max: {{max_agg}} * 1.5 // maximum value
+                }
+        }]
+    }
   };
   var data = {
+      //labels: ['Apple','Orange','Wanker','Cunt'],
+      //datasets: [{'data':[10,10,20,30]}],
       labels: {{chart_labels|safe}},
       datasets: {{chart_data|safe}}
   };
@@ -42,7 +52,7 @@
   var myLineChart = new Chart(ctx, {
       type: 'line',
       data: data,
-      options:options,
+      options: options,
   });
 </script>
 {% endif %}

@@ -2,7 +2,7 @@ from django.urls import reverse
 
 from django.views.generic import *
 from django import forms
-from bootstrap_datepicker_plus import DatePickerInput
+from kaucu.widgets import DatePickerInput
 
 from .sale import SaleChildCreate, SaleChildUpdate, SaleChildDelete
 from kaucu.models import Passenger
@@ -10,9 +10,9 @@ from kaucu.mixins import *
 from django.conf import settings
 
 class PassengerForm(forms.ModelForm):
-  dob = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS, widget=DatePickerInput(format=settings.DATE_INPUT_FORMATS[0]))
-  passport_expiry = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS, widget=DatePickerInput(format=settings.DATE_INPUT_FORMATS[0]))
-  passport_issue = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS, widget=DatePickerInput(format=settings.DATE_INPUT_FORMATS[0]))
+  dob = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS, widget=DatePickerInput())
+  passport_expiry = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS, widget=DatePickerInput())
+  passport_issue = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS, widget=DatePickerInput())
 
   class Meta:
     model = Passenger

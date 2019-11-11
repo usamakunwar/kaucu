@@ -42,17 +42,19 @@ class Payment(models.Model):
       self.slug = "P"+str(Helpers.randomInt(5))
     super().save(*args, **kwargs)
   
-  # def delete(self, *args, **kwargs):
-  #   local_sale_payments = self.sale_payment_set.all()
-  #   super().delete(*args, **kwargs)
-  #   for sale_payment in self.sale_payment_set.all():
-  #     sale_payment.sale.update_status()
+  def delete(self, *args, **kwargs):
+    #Update status of all sales associated with the payment
+    #Get a local copy of salepayments, then delete, as we cannot update status before delete as it wont change
+    local_sale_payments = list(self.sale_payment_set.all())
+    super().delete(*args, **kwargs)
+    for sale_payment in local_sale_payments:
+      sale_payment.sale.update_status()
 
   
   def __str__(self):
     payment = str(self.paid_date)+' Payment '+self.slug+'  '+self.direction
     if self.available:
-      payment += 'Available '+self.currency+' : '+str(self.available)
+      payment += ' '+self.currency+' :'+str(self.available)
     return u'{0}'.format(payment)
 
 

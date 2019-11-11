@@ -22,11 +22,6 @@ class PermissionMixin(PermissionRequiredMixin):
     if url_name == 'update':
       return ('kaucu.change_'+name,)
     elif url_name == 'create':
-      orange = ('kaucu.add_'+name,)
-      print(orange)
-      apple = self.request.user.has_perms(('kaucu.add_'+name,))
-      print('apple')
-      print(apple)
       return ('kaucu.add_'+name,)
     elif url_name == 'delete':
       return ('kaucu.delete_'+name,)
@@ -36,7 +31,8 @@ class PermissionMixin(PermissionRequiredMixin):
       return ('kaucu.view_'+name,)
 
 
-##Subclass GroupAccessMixin and provide group name, (use it if we need to ignore object permissions)
+#Subclass GroupAccessMixin and provide group name, 
+#(higher level permission, e.g. a user may have 'User' object permissions, but can be blocked if not in Admin group)
 class GroupAccessMixin(AccessMixin):
   def dispatch(self, request, *args, **kwargs):
     if not request.user.is_authenticated:
@@ -52,3 +48,11 @@ class AdminAccessMixin(GroupAccessMixin):
 
 class SalesAccessMixin(GroupAccessMixin):
   group_name = 'Sales'
+
+
+class AuthAccessMixin(AccessMixin):
+  def dispatch(self, request, *args, **kwargs):
+    if request.user.is_authenticated:
+      return super(AuthAccessMixin, self).dispatch(request, *args, **kwargs)
+    else:
+      return self.handle_no_permission()

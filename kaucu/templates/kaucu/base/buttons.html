@@ -1,0 +1,41 @@
+{% load myfilters %}
+
+{% with create_perm='kaucu.add_'|add:perm_name %}
+{% firstof link_name perm_name as name %}
+<div class="col-md-6 mb-2 pr-md-2">
+  <a class="row p-4 list-group-item-action cursor align-items-center center bg-in 
+    {% if create_perm in perms %} 
+      text-primary" 
+      {% if handle_dialog %}
+        onclick="handleDialog(`
+      {% else %}
+        href="
+      {% endif %}
+
+      {% if slug %}
+        {% url name|add:':create' slug %}
+      {% elif pk %}
+        {% url name|add:':create' pk %}
+      {% else %}
+        {% url name|add:':create' %}
+      {% endif %}
+
+      {% if handle_dialog %}
+        `)"
+      {% else %}
+        "
+      {% endif %}
+
+    {% else %}
+      disabled" href="#"
+    {% endif %}>
+    <div class="col-sm-12">+ New {{ name|maketitle }}</div>
+  </a>
+</div>
+{% endwith %}
+
+<div class="{% if has_filter == False %} col-md-6 {% else %} col-md-5  pr-md-2 {% endif %} mb-2">
+  <div class="row p-4 align-items-center center bg-in clr-white">
+    <div class="col-sm-12 pt-3 pb-2"></div>
+  </div>
+</div>

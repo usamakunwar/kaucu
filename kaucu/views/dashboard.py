@@ -7,6 +7,8 @@ from datetime import date
 import dateutil.relativedelta
 from django.core.serializers.json import DjangoJSONEncoder
 import json
+import operator
+from kaucu.mixins import *
 
 class DivErrorList(ErrorList):
   def __str__(self):
@@ -14,16 +16,20 @@ class DivErrorList(ErrorList):
   def as_divs(self):
     return '<p>'
 
-class Dashboard(View):
+class Dashboard(AuthAccessMixin, View):
     date_labels = None
     user_monthly_margins = None
     user_monthly_margins_agg = None
     today = date.today()
-    def get(self, request, *args, **kwargs):
+    def get(self, request, *args, **kwargs):      
       Supplier.objects.update_all_supplier_ex_rates()
+      
+      #Chart Data
       self.date_labels = self.monthly_labels(12)
       self.user_monthly_margins = User.objects.monthly_margins(self.date_labels)
       self.user_monthly_margins_agg = self.user_monthly_margins.monthly_margins_agg(self.date_labels)
+      max_agg = max(self.user_monthly_margins_agg.items(), key=operator.itemgetter(1))[1]
+
       #Chart will display (1) Total monthly margins of all users (2) Total monthly margins of each users
       chart_data = []
       margins_agg = self.create_margins_agg()
@@ -37,6 +43,7 @@ class Dashboard(View):
       response['current_month'] = self.today.strftime('%b-%y')
       response['current_year'] = self.today.strftime('%Y')
       response['current_year_total'] = margins_agg[1]
+      response['max_agg'] = max_agg
 
       return render(request, 'kaucu/dashboard.html',response)
 
@@ -67,8 +74,6 @@ class Dashboard(View):
           user_chart_data['total'] = 400
         data.append(user_chart_data)
       return data
-
-
     
     def monthly_labels(self, number):
       month_labels = []

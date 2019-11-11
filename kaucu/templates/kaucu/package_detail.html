@@ -1,5 +1,6 @@
 {% extends 'kaucu/base/base.html' %}
 {% block content %}
+{% include "kaucu/base/title.html" %}
 {% include "kaucu/base/breadcrumb.html" %}
 {% if perms.kaucu.change_package %}
 <a class="bread-icon clr-m" href="{% url request.resolver_match.namespace|add:':update' slug_or_pk %}">

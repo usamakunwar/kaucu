@@ -57,7 +57,7 @@ class SaleDelete(ContactChildDelete):
   model = Sale
 class SaleDetail(ContactChildDetail):
   model = Sale
-  queryset = Sale.objects.child_prefetch()
+  queryset = Sale.objects.with_prefetch_related()
   def get_object(self):
     obj = super().get_object()
     obj.balance_sheet = obj.get_balance_sheet()
@@ -67,7 +67,8 @@ class SaleDetail(ContactChildDetail):
 class SaleList(PermissionMixin, FilterMixin, ListView):
   model = Sale
   def get_queryset(self):
-    self.filter = SaleFilter(self.request.GET, queryset=super().get_queryset())
+    queryset = Sale.objects.restrict_creator(self.request.user).with_related().order_by(self.ordering)
+    self.filter = SaleFilter(self.request.GET, queryset=queryset)
     return self.filter.qs
 
 class SaleChildCreate(PermissionMixin, CreateView):

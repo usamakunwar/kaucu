@@ -20,9 +20,13 @@ class Service(models.Model):
   class Meta:
     abstract = True
   def save(self, *args, **kwargs):
+    self.currency = self.supplier.currency
+    self.currency_rate = self.supplier.currency_rate
     super().save(*args, **kwargs)
-    if 'update_fields' not in kwargs:
-      self.sale.recalculate_cost()
+    self.sale.recalculate_cost()
+
+      
+
   def delete(self, *args, **kwargs):
     super().delete(*args, **kwargs)
     self.sale.recalculate_cost()

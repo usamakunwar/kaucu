@@ -1,9 +1,14 @@
 {% extends 'kaucu/base/base.html' %}
 {% block content %}
+{% include "kaucu/base/title.html" %}
 {% include "kaucu/base/breadcrumb.html" %}
 <div class="right-icon"><i class="fas fa-box-open"></i></div>
-
-{% include "kaucu/base/filter_list.html" %}
+<div class="row">
+  {% with perm_name=request.resolver_match.namespace %}
+    {% include "kaucu/base/buttons.html" %}
+  {% endwith %}
+  {% include "kaucu/base/filter_form.html" %}
+  </div>
 <div class="table-responsive-lg bg-in mb-2">
   <table class="table table-hover">
     <thead>

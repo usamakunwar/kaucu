@@ -1,15 +1,4 @@
 {% load myfilters %}
-<div class="row px-4 py-2"><h1>
-  {% if object_list is not None %}
-    {{request.resolver_match.namespace|maketitle}}s
-  {% elif object %} 
-    {{object}}   
-  {% else %}
-    New {{request.resolver_match.namespace|maketitle}}
-  {% endif %}
-
-</h1></div>
-
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb bg-none mb-0">
       <!--FOS-->

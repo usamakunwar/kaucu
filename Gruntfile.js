@@ -9,7 +9,6 @@ module.exports = function(grunt) {
             'bower_components/jquery/dist/jquery.js',
             'bower_components/bootstrap/dist/js/bootstrap.bundle.js',
             'bower_components/typeahead.js/dist/typeahead.bundle.js',
-            'bower_components/bootstrap-select/dist/js/bootstrap-select.js', 
             ]
           }
         },
@@ -18,6 +17,9 @@ module.exports = function(grunt) {
             'kaucu/static/js/common.js': ['src/javascripts/common.js'],
             'kaucu/static/js/form.js': ['src/javascripts/form.js'],
             'kaucu/static/js/chart.js': ['bower_components/chart.js/dist/Chart.js'],
+            'kaucu/static/js/select.js': ['bower_components/bootstrap-select/dist/js/bootstrap-select.js'],
+            'kaucu/static/js/moment.js': ['bower_components/moment/moment.js'],
+            'kaucu/static/js/datetimepicker.js': ['bower_components/tempusdominus-bootstrap-4/build/js/tempusdominus-bootstrap-4.js'],
           }
         } 
       },
@@ -30,6 +32,7 @@ module.exports = function(grunt) {
             'bower_components/bootstrap/dist/css/bootstrap.css', 
             'bower_components/bootstrap-select/dist/css/bootstrap-select.css', 
             'bower_components/fontawesome/css/all.css', 
+            'bower_components/tempusdominus-bootstrap-4/build/css/tempusdominus-bootstrap-4.css', 
             'src/stylesheets/style.css',
             ]
           }

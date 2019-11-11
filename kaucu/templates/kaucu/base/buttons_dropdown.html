@@ -1,0 +1,31 @@
+{% load myfilters %}
+<div class="col-md-6 mb-2 pr-md-2">
+    <div class="col-sm-12 mb-2 pr-sm-2">
+      <div class="row p-4 align-items-center center bg-in text-primary ">
+        <div class="col-sm-12">
+            <div class="dropdown show">
+                <a class="dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    + Add {{name|title}}</a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    {% for button in buttons.split %}
+                    <a class="dropdown-item
+                    {% with create_perm='kaucu.add_'|add:button %}
+                      {% if create_perm in perms %} 
+                       " href="{% url button|add:':create' slug %}"
+                      {% else %}
+                       disabled" href="#"
+                      {% endif %}
+                    {% endwith %}
+                    ">{{button|title}}</a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+</div>
+<div class="{% if has_filter == False %} col-md-6 {% else %} col-md-5  pr-md-2 {% endif %} mb-2">
+  <div class="row p-4 align-items-center center bg-in clr-white">
+    <div class="col-sm-12 pt-3 pb-2"></div>
+  </div>
+</div>

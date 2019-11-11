@@ -1,6 +1,7 @@
 {% extends 'kaucu/base/base.html' %}
 {% load myfilters %}
 {% block content %}
+{% include "kaucu/base/title.html" %}
 {% include "kaucu/base/breadcrumb.html" %}
 
 {% if perms.kaucu.change_sale %}
@@ -8,11 +9,21 @@
     <i class="far fa-edit"></i>
 </a>  
 {% endif %}   
+
 <div class="row">
-    <div class="col-md-6 col-lg-4 mb-2 pr-lg-2">
-        <div class="row px-4 py-2 clr-white {{object.status|makeClass}}-status"><div class="col-6">Status</div><div class="col-6"><strong>{{object.status}}</strong></div></div>
+    <div class="col-md-6 col-lg-4 mb-2">
+        <div class="row px-4 py-2 clr-white {{object.status|makeClass}}-status">
+          <div class="col-3">Status</div>
+          <div class="col-9">
+            <strong>{{object.status}} </strong>
+            {% if object.confirmed_date %}
+              &nbsp;&nbsp; 
+              ({{object.confirmed_date|date:'d/m/y'}})
+            {% endif %}
+          </div>
+        </div>
     </div>
-    <div class="col-md-6 col-lg-4 mb-2 pr-lg-2">
+    <div class="col-md-6 col-lg-4 mb-2">
       <div class="row px-4 py-2 bg-in"><div class="col-6">Package</div><div class="col-6">{{object.package}}</div></div>
     </div>
     <div class="col-md-6 col-lg-4 mb-2">
@@ -20,10 +31,10 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-sm-4 mb-2 pr-sm-2">
+    <div class="col-sm-4 mb-2">
       <div class="row px-4 py-2 bg-in"><div class="col-6">Adult</div><div class="col-6">{{object.adult}}</div></div>
     </div>
-    <div class="col-sm-4 mb-2 pr-sm-2">
+    <div class="col-sm-4 mb-2">
       <div class="row px-4 py-2 bg-in"><div class="col-6">Child</div><div class="col-6">{{object.child}}</div></div>
     </div>
     <div class="col-sm-4 mb-2">
@@ -47,9 +58,6 @@
     </div>
 </div>
 
-
-
-
 <ul class="nav nav-tabs" id="myTab" role="tablist">
   <li class="nav-item">
     <a class="nav-link {% if request.resolver_match.url_name == 'detail' %} active {% endif %}" 
@@ -67,160 +75,155 @@
 <div class="tab-content mt-2"> 
   <div class="tab-pane fade {% if request.resolver_match.url_name == 'detail' %} show active {% endif %}" id="services" role="tabpanel" aria-labelledby="services-tab">
     <div class="row">
-      <div class="col-sm-6 mb-2 pr-sm-1 ">
-        <div class="row p-4 align-items-center center bg-in text-primary ">
-          <div class="col-sm-12">
-              <div class="dropdown show">
-                  <a class="dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      + Add Service</a>
-                  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                      <a class="dropdown-item" href="{% url 'hotel:create' object.slug %}">Hotel</a>
-                      <a class="dropdown-item" href="{% url 'flight:create' object.slug %}">Flight</a>
-                      <a class="dropdown-item" href="{% url 'transfer:create' object.slug %}">Transfer</a>
-                  </div>
-              </div>
-          </div>
-        </div>
-      </div>
-      
+      {% with name="service" buttons='hotel flight transfer' slug=object.slug has_filter=False %}
+        {% include "kaucu/base/buttons_dropdown.html" %}
+      {% endwith %}
     </div>
-    {% if sale.hotel_set.count > 0 %}
-      <h3 class="p-3">Hotels</h3>
-      <table class="table bg-in mb-2">
-        <thead>
-          <tr>
-            <th>Supplier</th>
-            <th>Hotel</th>
-            <th>City</th>
-            <th>Check In</th>
-            <th>Check Out</th>
-            <th>Rating</th>
-            <th>Room</th>
-            <th>View</th>
-            <th>Meal</th>
-            <th>Qty</th>
-            <th>Rate</th>
-            <th>Cost</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-            {% for hotel in sale.hotel_set.all %}
-              <tr>
-                <td>{{hotel.supplier}}</td>
-                <td>{{hotel.hotel}}</td>
-                <td>{{hotel.city}}</td>
-                <td>{{hotel.check_in|date:"d/m/y H:s"}}</td>
-                <td>{{hotel.check_out|date:"d/m/y H:s"}}</td>
-                <td>{{hotel.rating}}</td>
-                <td>{{hotel.room_type}}</td>
-                <td>{{hotel.view}}</td>
-                <td>{{hotel.meal}}</td>
-                <td>{{hotel.quantity}}</td>
-                <td>{{hotel.currency_rate}}</td>
-                <td>{{hotel.cost}}</td>
-                <td><a class="clr-m" href="{% url 'hotel:update' hotel.pk %}"><i class="far fa-edit"></i></a></td>
-              </tr>
-            {% endfor %}
-        </tbody>
-      </table>
-    {% endif %}
-    {% if sale.flight_set.count > 0 %}
-      <h3 class="p-3">Flights</h3>
-      <table class="table bg-in mb-2">
-        <thead>
-          <tr>
-            <th>Supplier</th>
-            <th>Airline</th>
-            <th>Flight No.</th>
-            <th>Departure</th>
-            <th>Time</th>
-            <th>Arrival</th>
-            <th>Time</th>
-            <th>Class</th>
-            <th>A</th>
-            <th>C</th>
-            <th>I</th>
-            <th>Rate</th>
-            <th>Cost</th>
-            <th></th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-            {% for flight in sale.flight_set.all %}
-              <tr>
-                <td>{{flight.supplier}}</td>
-                <td>{{flight.airline}}</td>
-                <td>{{flight.flight_no}}</td>
-                <td>{{flight.departure_airport}}</td>
-                <td>{{flight.departure_time|date:"d/m/y H:s"}}</td>
-                <td>{{flight.arrival_airport}}</td>
-                <td>{{flight.arrival_time|date:"d/m/y H:s"}}</td>
-                <td>{{flight.seat_class}}</td>
-                <td>{{flight.adult}}</td>
-                <td>{{flight.child}}</td>
-                <td>{{flight.infant}}</td>
-                <td>{{flight.currency_rate}}</td>
-                <td>{{flight.cost}}</td>
-                <td><a class="clr-m" href="{% url 'flight:update' flight.pk %}"><i class="far fa-edit"></i></a></td>
-              </tr>
-            {% endfor %}
-        </tbody>
-      </table>
-    {% endif %}  
-    
-    {% if sale.transfer_set.count > 0 %}
-      <h3 class="p-3">Transfers</h3>
-      <table class="table bg-in mb-2">
-        <thead>
-          <tr>
-            <th>Supplier</th>
-            <th>From</th>
-            <th>Date</th>
-            <th>To</th>
-            <th>Date</th>
-            <th>Vehicle</th>
-            <th>A</th>
-            <th>C</th>
-            <th>I</th>
-            <th>Rate</th>
-            <th>Cost</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-            {% for transfer in sale.transfer_set.all %}
-              <tr>
-                <td>{{transfer.supplier}}</td>
-                <td>{{transfer.from_location}}</td>
-                <td>{{transfer.from_time|date:"d/m/y H:s"}}</td>
-                <td>{{transfer.to_location}}</td>
-                <td>{{transfer.to_time|date:"d/m/y H:s"}}</td>
-                <td>{{transfer.vehicle}}</td>
-                <td>{{transfer.adult}}</td>
-                <td>{{transfer.child}}</td>
-                <td>{{transfer.infant}}</td>
-                <td>{{transfer.currency_rate}}</td>
-                <td>{{transfer.cost}}</td>
-                <td><a class="clr-m" href="{% url 'transfer:update' transfer.pk %}"><i class="far fa-edit"></i></a></td>
-              </tr>
-            {% endfor %}
-        </tbody>
-      </table>
-    {% endif %}      
+    <div class="row bg-in border-bottom">      
+      {% if sale.hotel_set.count > 0 %}
+      <div class="col-12 mb-3">
+        <h4 class="p-3 border-bottom mb-0">Hotels</h4>
+        <table class="table bg-in border-bottom mb-0">
+          <thead>
+            <tr>
+              <th>Supplier</th>
+              <th>Hotel</th>
+              <th>City</th>
+              <th>Check In</th>
+              <th>Check Out</th>
+              <th>Rating</th>
+              <th>Room</th>
+              <th>View</th>
+              <th>Meal</th>
+              <th>Qty</th>
+              <th>Rate</th>
+              <th></th>
+              <th>Cost</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+              {% for hotel in sale.hotel_set.all %}
+                <tr>
+                  <td>{{hotel.supplier}}</td>
+                  <td>{{hotel.hotel}}</td>
+                  <td>{{hotel.city}}</td>
+                  <td>{{hotel.check_in|date:"d/m/y H:s"}}</td>
+                  <td>{{hotel.check_out|date:"d/m/y H:s"}}</td>
+                  <td>{{hotel.rating}}</td>
+                  <td>{{hotel.room_type}}</td>
+                  <td>{{hotel.view}}</td>
+                  <td>{{hotel.meal}}</td>
+                  <td>{{hotel.quantity}}</td>
+                  <td>{{hotel.currency_rate}}</td>
+                  <td>{{hotel.currency}}</td>
+                  <td>{{hotel.cost}}</td>
+                  <td><a class="clr-m" href="{% url 'hotel:update' hotel.pk %}"><i class="far fa-edit"></i></a></td>
+                </tr>
+              {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% endif %}
+      {% if sale.flight_set.count > 0 %}
+      <div class="col-12 mb-3">
+        <h4 class="p-3 border-bottom mb-0">Flights</h4>
+        <table class="table bg-in border-bottom mb-0">
+          <thead>
+            <tr>
+              <th>Supplier</th>
+              <th>Airline</th>
+              <th>Flight No.</th>
+              <th>Departure</th>
+              <th>Time</th>
+              <th>Arrival</th>
+              <th>Time</th>
+              <th>Class</th>
+              <th>A</th>
+              <th>C</th>
+              <th>I</th>
+              <th>Rate</th>
+              <th></th>
+              <th>Cost</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+              {% for flight in sale.flight_set.all %}
+                <tr>
+                  <td>{{flight.supplier}}</td>
+                  <td>{{flight.airline}}</td>
+                  <td>{{flight.flight_no}}</td>
+                  <td>{{flight.departure_airport}}</td>
+                  <td>{{flight.departure_time|date:"d/m/y H:s"}}</td>
+                  <td>{{flight.arrival_airport}}</td>
+                  <td>{{flight.arrival_time|date:"d/m/y H:s"}}</td>
+                  <td>{{flight.seat_class}}</td>
+                  <td>{{flight.adult}}</td>
+                  <td>{{flight.child}}</td>
+                  <td>{{flight.infant}}</td>
+                  <td>{{flight.currency_rate}}</td>
+                  <td>{{flight.currency}}</td>
+                  <td>{{flight.cost}}</td>
+                  <td><a class="clr-m" href="{% url 'flight:update' flight.pk %}"><i class="far fa-edit"></i></a></td>
+                </tr>
+              {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% endif %}  
+      {% if sale.transfer_set.count > 0 %}
+      <div class="col-12 mb-3">
+        <h4 class="p-3 border-bottom mb-0">Transfers</h4>
+        <table class="table bg-in border-bottom mb-0">
+          <thead>
+            <tr>
+              <th>Supplier</th>
+              <th>From</th>
+              <th>Date</th>
+              <th>To</th>
+              <th>Date</th>
+              <th>Vehicle</th>
+              <th>A</th>
+              <th>C</th>
+              <th>I</th>
+              <th>Rate</th>
+              <th></th>
+              <th>Cost</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+              {% for transfer in sale.transfer_set.all %}
+                <tr>
+                  <td>{{transfer.supplier}}</td>
+                  <td>{{transfer.from_location}}</td>
+                  <td>{{transfer.from_time|date:"d/m/y H:s"}}</td>
+                  <td>{{transfer.to_location}}</td>
+                  <td>{{transfer.to_time|date:"d/m/y H:s"}}</td>
+                  <td>{{transfer.vehicle}}</td>
+                  <td>{{transfer.adult}}</td>
+                  <td>{{transfer.child}}</td>
+                  <td>{{transfer.infant}}</td>
+                  <td>{{transfer.currency_rate}}</td>
+                  <td>{{transfer.currency}}</td>
+                  <td>{{transfer.cost}}</td>
+                  <td><a class="clr-m" href="{% url 'transfer:update' transfer.pk %}"><i class="far fa-edit"></i></a></td>
+                </tr>
+              {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% endif %}    
+    </div>
   </div>
   <div class="tab-pane fade {% if request.resolver_match.url_name == 'payment' %} show active {% endif %}" id="payments" role="tabpanel" aria-labelledby="payments-tab">
     <div class="row">
-      <div class="col-sm-6 mb-2 pr-sm-1 ">
-        <a onclick="handleDialog(`{% url 'sale_payment:create' object.slug %}`)"
-          class="row p-4 list-group-item-action cursor align-items-center center bg-in text-primary">
-          <div class="col-sm-12">+ Assign Payment</div>
-        </a>
-      </div>
+      {% with perm_name='sale_payment' slug=object.slug has_filter=False handle_dialog=True %}
+        {% include "kaucu/base/buttons.html" %}
+      {% endwith %}
     </div>
-    {% if object.balance_sheet %}
-    <table class="table bg-in mb-2">
+    <table class="table bg-in border-bottom mb-0">
       <thead>
         <tr>
           <th>Payment Id</th>
@@ -234,7 +237,7 @@
           {% for item in object.balance_sheet %}
             <tr>
               <td>{{item.payment_slug}}</td>
-              <td>{{item.paid_date}}</td>
+              <td>{{item.paid_date|date:'d/m/y'}}</td>
               <td>{% if item.in_payment != 0 %}{{item.in_payment}}{% endif %}</td>
               <td>{% if item.out_payment != 0 %}{{item.out_payment}}{% endif %}</td>
               <th><button onclick="handleDialog(`{% url 'sale_payment:delete' object.slug item.pk %}`)" type="button" class="close text-danger" aria-label="Close">
@@ -244,19 +247,14 @@
           {% endfor %}
       </tbody>
     </table>
-    {% endif %} 
   </div>
   <div class="tab-pane fade {% if request.resolver_match.url_name == 'passenger' %} show active {% endif %}" id="passengers" role="tabpanel" aria-labelledby="passengers-tab">
     <div class="row">
-      <div class="col-sm-6 mb-2 pr-sm-1 ">
-        <a href="{% url 'passenger:create' object.slug %}"
-          class="row p-4 list-group-item-action cursor align-items-center center bg-in text-primary">
-          <div class="col-sm-12">+ Add Passenger</div>
-        </a>
-      </div>
+      {% with perm_name='passenger' slug=object.slug has_filter=False %}
+        {% include "kaucu/base/buttons.html" %}
+      {% endwith %}
     </div>
-    {% if sale.passenger_set.count > 0 %}
-    <table class="table bg-in mb-2">
+    <table class="table bg-in border-bottom mb-0">
       <thead>
         <tr>
           <th>Title</th>
@@ -292,7 +290,6 @@
           {% endfor %}
       </tbody>
     </table>
-    {% endif %} 
   </div>
 </div>
 

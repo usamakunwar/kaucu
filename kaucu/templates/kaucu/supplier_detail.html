@@ -1,6 +1,7 @@
 {% extends 'kaucu/base/base.html' %}
 {% load myfilters %}
 {% block content %}
+{% include "kaucu/base/title.html" %}
 {% include "kaucu/base/breadcrumb.html" %}
 {% if perms.kaucu.change_supplier %}
 <a class="bread-icon clr-m" href="{% url request.resolver_match.namespace|add:':update' slug_or_pk %}">
@@ -34,12 +35,17 @@
 <div class="tab-content mt-2"> 
   <div class="tab-pane fade show active" id="payments" role="tabpanel" aria-labelledby="payments-tab">
     <div class="row">
-      <div class="col-sm-6 mb-2 pr-sm-1 ">
+      <div class="col-sm-6 mb-2 pr-sm-2">
         <a onclick="handleDialog(`{% url 'supplier_payment:create' object.pk %}`)"
           class="row p-4 list-group-item-action cursor align-items-center center bg-in text-primary">
           <div class="col-sm-12">+ Assign Payment</div>
         </a>
       </div>
+      <div class="col-md-6 mb-2">
+          <div class="row p-4 align-items-center center bg-in clr-white">
+            <div class="col-sm-12 pt-3 pb-2"></div>
+          </div>
+        </div>
     </div>
     <table class="table bg-in mb-2">
         <thead>
@@ -50,17 +56,31 @@
               <th scope="col">Package</th>
               <th scope="col">Credit</th>
               <th scope="col">Debit</th>
+              <th scope="col"></th>
             </tr>
           </thead>
       <tbody>
           {% for item in object.balance_sheet %}
             <tr>
-              <td>{% if item.service != '' %}<a target="_blank" href="{% url 'sale:detail' item.slug %}">{{item.slug}}</a>{% else %}{{item.slug}}{% endif %}</td>
+              <td>
+                  {% if item.service != '' %}
+                    <a target="_blank" href="{% url 'sale:detail' item.slug %}">{{item.slug}}</a>
+                  {% else %}
+                    {{item.slug}}
+                  {% endif %}
+              </td>
               <td>{{item.paid_date}}</td>
               <td>{{item.service}}</td>
               <td>{{item.package}}</td>
               <td>{% if item.in_payment != 0 %}{{item.in_payment}}{% endif %}</td>
               <td>{% if item.out_payment != 0 %}{{item.out_payment}}{% endif %}</td>
+              <td>
+                {% if item.service == '' %}
+                  <button onclick="handleDialog(`{% url 'supplier_payment:delete' item.pk %}`)" type="button" class="close text-danger" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                {% endif %}
+              </td>
+
             </tr>
           {% endfor %}
       </tbody>
