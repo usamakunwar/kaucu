@@ -20,7 +20,7 @@ class UserQuerySet(models.QuerySet):
   def contacts(self):
     return self.filter(is_staff=False)
   def users(self):
-    return self.filter(is_staff=True)
+    return self.filter(is_staff=True, is_superuser=False)
   def contact_sales(self):
     return self.contacts().prefetch_related('sale_set')
   def created_sales(self):
