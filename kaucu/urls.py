@@ -3,6 +3,7 @@ from django.urls import path, include
 from kaucu import views
 from django.contrib.auth import views as auth_views
 
+
 user_patterns = ([
     path('', views.UserList.as_view() , name='list'),
     path('<str:slug>/', views.UserDetail.as_view() , name='detail'),
