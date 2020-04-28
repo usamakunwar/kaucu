@@ -8,6 +8,8 @@ https://docs.djangoproject.com/en/2.2/howto/deployment/wsgi/
 """
 
 import os
+import sys
+sys.path.append('/opt/bitnami/apps/django/django_projects/kaucu')
 
 from django.core.wsgi import get_wsgi_application
 
