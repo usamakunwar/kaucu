@@ -25,7 +25,7 @@ SECRET_KEY = '1#1mca+tfq+*9w$ditv*u3_($80o^ktdcr$2&7adeqmussof#-'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','localhost','3.11.202.227']
+ALLOWED_HOSTS = ['127.0.0.1','localhost','3.8.70.200']
 
 
 # Application definition
@@ -128,6 +128,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = '/opt/bitnami/apps/django/django_projects/kaucu/static/'
 
 
 AUTH_USER_MODEL = 'kaucu.User'
