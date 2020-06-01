@@ -1,6 +1,6 @@
-# kaucu (Python, Django 2.2.4)
+# kaucu 
 
-Travel System
+Travel System (Python, Django 2.2.4)
 
 Sample Hosted: http://3.8.70.200/kaucu/login/
 
