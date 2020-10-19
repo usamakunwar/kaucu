@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '1#1mca+tfq+*9w$ditv*u3_($80o^ktdcr$2&7adeqmussof#-'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1','localhost','3.8.70.200']
 
@@ -127,12 +127,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-STATIC_URL = '/static/'
+#STATIC_URL = '/static/'
+STATIC_URL = '/kaucu/static/'
 STATIC_ROOT = '/opt/bitnami/apps/django/django_projects/kaucu/static/'
 
 
 AUTH_USER_MODEL = 'kaucu.User'
-LOGIN_REDIRECT_URL = '/'
+#LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/kaucu'
 LOGIN_URL = 'login'
 LOGOUT_REDIRECT_URL = 'login'
 

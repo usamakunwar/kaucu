@@ -19,7 +19,7 @@ class UserFilter(django_filters.FilterSet):
     fields = {'slug': ['exact'], 'email': ['contains'], 'first_name': ['contains'], 'last_name': ['contains'],'postcode': ['contains']}    
 
 class UserForm(forms.ModelForm):    
-  new_password = forms.CharField(required=False, widget=forms.PasswordInput)
+  #new_password = forms.CharField(required=False, widget=forms.PasswordInput)
   class Meta:
     model = User
     fields = ['email', 'first_name', 'last_name', 'groups', 'color']
@@ -42,8 +42,8 @@ class UserUpdate(AdminAccessMixin, UpdateView):
   form_class = UserForm
   queryset = User.objects.users()
   def form_valid(self, form):
-    if form.data['new_password']:
-      form.instance.set_password(form.data['new_password'])
+    #if form.data['new_password']:
+    #  form.instance.set_password(form.data['new_password'])
     return super().form_valid(form)
   def get_success_url(self):
     return reverse('user:detail', kwargs=self.kwargs)
