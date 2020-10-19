@@ -16,7 +16,9 @@ class SupplierQuerySet(models.QuerySet):
     for supplier in self.all():
       if now.date() > supplier.last_edit.date():
         if supplier.currency not in rates:
-          rates[supplier.currency] = CurrencyLayer().exchangeRate(supplier.currency)
+          new_rate = CurrencyLayer().exchangeRate(supplier.currency)
+          if new_rate == None:  return 
+          rates[supplier.currency] = new_rate
           supplier.currency_rate = rates[supplier.currency]
         else:
           supplier.currency_rate = rates[supplier.currency]

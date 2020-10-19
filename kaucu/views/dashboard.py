@@ -22,7 +22,7 @@ class Dashboard(AuthAccessMixin, View):
     user_monthly_margins_agg = None
     today = date.today()
     def get(self, request, *args, **kwargs):      
-      Supplier.objects.update_all_supplier_ex_rates()
+      #Supplier.objects.update_all_supplier_ex_rates()
       
       #Chart Data
       self.date_labels = self.monthly_labels(12)

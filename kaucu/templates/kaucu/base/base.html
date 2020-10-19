@@ -74,15 +74,15 @@
   {{ form.media }}
   {% include "kaucu/base/dialog.html" %}
   <script>
-      $( ".row-click td" ).wrapInner( "<span class=\"cancel-click\"></div>" );
+      //$( ".row-click td" ).wrapInner( "<span class=\"cancel-click\"></div>" );
       //Cancel click for buttond
       $('.row-click td button').click(function (e) {
         e.stopPropagation();
       });
       //Cancel click for text, so it can be copied
-      $('.row-click .cancel-click').click(function (e) {
-        e.stopPropagation();
-      });
+      // $('.row-click .cancel-click').click(function (e) {
+      //   e.stopPropagation();
+      // });
       $(".row-click").click(function() {
         window.location = $(this).data("href");
       });

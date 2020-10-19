@@ -7,10 +7,15 @@ class CurrencyLayer:
     toCurrency = 'GBP'
     if fromCurrency != 'GBP':
       endpoint = 'live'
-      url = 'https://apilayer.net/api/'+endpoint+'?access_key='+self.access_key+'&currencies='+fromCurrency+'&source='+toCurrency
+      url = 'http://apilayer.net/api/'+endpoint+'?access_key='+self.access_key+'&currencies='+fromCurrency+'&source='+toCurrency
       req = requests.get(url)
-      rate = req.json()['quotes'][toCurrency+fromCurrency]
-      return round(Decimal(rate),4)
+      res = req.json()
+      if 'quotes' in res and toCurrency+fromCurrency in res['quotes']:
+        rate = res['quotes'][toCurrency+fromCurrency]
+        return round(Decimal(rate),4)
+      else:
+        print(res)
+        return None
     else:
       return 1
 
@@ -19,9 +24,14 @@ class CurrencyLayer:
     ##date YYYY-MM-DD
     if fromCurrency != 'GBP':
       endpoint = 'historical'
-      url = 'https://apilayer.net/api/'+endpoint+'?access_key='+self.access_key+'&currencies='+fromCurrency+'&source='+toCurrency+'&date='+date
+      url = 'http://apilayer.net/api/'+endpoint+'?access_key='+self.access_key+'&currencies='+fromCurrency+'&source='+toCurrency+'&date='+date
       req = requests.get(url)
-      rate = req.json()['quotes'][toCurrency+fromCurrency]
-      return round(Decimal(rate),4)
+      res = req.json()
+      if 'quotes' in res and toCurrency+fromCurrency in res['quotes']:
+        rate = res['quotes'][toCurrency+fromCurrency]
+        return round(Decimal(rate),4)
+      else:
+        print(res)
+        return None
     else:
       return 1

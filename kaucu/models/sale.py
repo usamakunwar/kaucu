@@ -4,7 +4,6 @@ from django.db.models import Sum, F, Aggregate, Count, OuterRef, Subquery, Value
 from .user import User
 from .package import *
 from kaucu.helpers import *
-from kaucu.api import CurrencyLayer
 from django.db.models.functions import Coalesce
 from django.db.models import *
 
