@@ -105,7 +105,7 @@ responder_patterns = ([
 
 urlpatterns = [
     path('', views.Dashboard.as_view(), name='dashboard'),
-    path('login/', auth_views.LoginView.as_view(), name='login'),
+    path('login/', auth_views.LoginView.as_view(redirect_authenticated_user=True), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('password_reset/', auth_views.PasswordResetView.as_view(), name='password_reset'),
 
